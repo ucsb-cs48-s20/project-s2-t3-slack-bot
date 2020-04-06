@@ -1,10 +1,10 @@
-Team Members:
+## Team Members:
 Alan Zhang
 Adarsha Poudel
 Kourosh Safari
 Tommy Chao
 
-Agreements:
+## Agreements:
 * If you cannot make it to the discussion, notify your team memebers 24 hours in advance. 
 * Keep absences to a minimum. 
 * Record all our notes in the slack channel. 
