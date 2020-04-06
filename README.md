@@ -4,6 +4,7 @@ Description: A simple bot that can call music from webiste, pull images from web
 currency system that lets user earn points for participating in discussions. 
 
 Team Members:
-Adarsha Poudel
-Kourosh Safari
-Tommy Chao
+* Adarsha Poudel
+* Kourosh Safari
+* Tommy Chao
+* Alan Zhang
