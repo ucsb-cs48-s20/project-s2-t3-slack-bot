@@ -1,7 +1,10 @@
 ## Team Members:
 Alan Zhang
+
 Adarsha Poudel
+
 Kourosh Safari
+
 Tommy Chao
 
 ## Agreements:
