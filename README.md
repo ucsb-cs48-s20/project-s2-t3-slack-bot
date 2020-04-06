@@ -1,4 +1,4 @@
-** Name of the project: Slack Bot **
+* Name of the project: Slack Bot *
 
 ## Description: 
 
