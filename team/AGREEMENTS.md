@@ -1,11 +1,11 @@
 ## Team Members:
-Alan Zhang
+* Alan Zhang
 
-Adarsha Poudel
+* Adarsha Poudel
 
-Kourosh Safari
+* Kourosh Safari
 
-Tommy Chao
+* Tommy Chao
 
 ## Agreements:
 * If you cannot make it to the discussion, notify your team memebers 24 hours in advance. 
