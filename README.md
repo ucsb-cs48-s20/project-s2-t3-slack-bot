@@ -4,7 +4,7 @@
 
 A simple bot on Stack that can call music from webistes, pull images from websites, and a
 currency system that lets user earn points for participating in discussions. The currency will be given to 
-users manually by a command (/award) to display their contribution to the channel. The system will also include
+users manually by a command (/appraise) to display their contribution to the channel. The system will also include
 a command that can show the amount of points a user has (/reputation @[username]). As for the other features, they
 will be expanded on as we progress in the project.
 
