@@ -4,7 +4,7 @@
 |-----------|-------------------|--------------------------------------------------------|
 | Mon 04/13 | Alan Zhang        | Led team discussion to define MVP, acceptance criteria | 
 | Tue 04/14 | TBD               | Led team discussion of learning plan                   | 
-| Thu 04/17 | TBD               | TBD                                                    | 
+| Thu 04/17 | TBD               | Led team discussion for Retro                          | 
 | Mon 04/20 | TBD               | TBD                                                    | 
 | Tue 04/21 | TBD               | TBD                                                    | 
 | Thu 04/24 | TBD               | TBD                                                    | 
