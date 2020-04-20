@@ -9,6 +9,8 @@
 * a change: Being more direct/critical towards each other. 
 * a measurement: More slack messages sent than previous week. 
 
+## Action item
+
 * a goal: Learning the respective stacks as soon as possible. 
 * a change: Try to ask more help to TAs or teammates  in slack channel. 
 * a measurement: More slack messages sent than previous week. 
