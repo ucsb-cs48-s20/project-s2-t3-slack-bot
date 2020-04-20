@@ -17,7 +17,7 @@
 
 ## Retro Assessment
 
-* A brief description of what retro outline or process you used.
+* I used Start/Stop/Continue template to lead the retro. All the team members were asked to write one thing they want to stop, start, or continue at the beggining of the session. Then, we disccused those ideas amongst each other. 
 * A brief assessment of how it went.
 * What advice would you give to the next person leading a retro
   based on what you learned today?
