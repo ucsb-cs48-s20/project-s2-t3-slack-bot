@@ -1,6 +1,6 @@
 ## Name of the project: Slack Bot
 
-## Description:
+## Description: 
 
 A simple bot on Stack that can call music from webistes, pull images from websites, and a
 currency system that lets user earn points for participating in discussions. The currency will be given to
