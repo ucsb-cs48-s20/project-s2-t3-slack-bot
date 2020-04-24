@@ -13,7 +13,7 @@ function AppNavbar(props) {
     <Navbar bg="light" expand="lg">
       <Container>
         <Link href="/" passHref={true}>
-          <Navbar.Brand>Next.js Demo App</Navbar.Brand>
+          <Navbar.Brand>Slack Bot</Navbar.Brand>
         </Link>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
