@@ -7,6 +7,9 @@
 
 * Tommy Chao
 
+# 4/30/2020   
+* Team decided to make repo public (open source under MIT license).
+
 ## Agreements:
 * If you cannot make it to the discussion, notify your team memebers 24 hours in advance. 
 * Keep absences to a minimum. 
