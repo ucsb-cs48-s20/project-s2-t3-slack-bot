@@ -15,7 +15,7 @@ export default async function (req, res) {
     uri: 'https://slack.com/api/chat.postMessage',
     body: data,
     json:true
-  }
+  });
   // await request.post("https://slack.com/api/chat.postMessage", data);
   res.statusCode = 200;
   res.setHeader("Content-Type", "application/json");
