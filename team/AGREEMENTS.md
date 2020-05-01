@@ -1,14 +1,13 @@
-## Team Members:
-* Alan Zhang
-
-* Adarsha Poudel
-
-* Kourosh Safari
-
-* Tommy Chao
+# Initial Team Agreements
 
 # 4/30/2020   
 * Team decided to make repo public (open source under MIT license).
+
+## Team Members:
+* Alan Zhang
+* Adarsha Poudel
+* Kourosh Safari
+* Tommy Chao
 
 ## Agreements:
 * If you cannot make it to the discussion, notify your team memebers 24 hours in advance. 
