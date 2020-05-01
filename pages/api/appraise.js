@@ -14,5 +14,5 @@ export default async function (req, res) {
   await request.post("https://slack.com/api/chat.postMessage", data);
   res.statusCode = 200;
   res.setHeader("Content-Type", "application/json");
-  res.end(JSON.stringify({ text }));
+  res.end(JSON.stringify({ name: "John Doe" }));
 }
