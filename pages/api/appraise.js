@@ -3,7 +3,7 @@ require("dotenv").config();
 const request = require("request");
 
 export default async function (req, res) {
-  console.log("PRINT");
+  console.log("Token:" + process.env.SLACK_AUTH_TOKEN);
   var data = {
     form: {
       token: process.env.SLACK_AUTH_TOKEN,
