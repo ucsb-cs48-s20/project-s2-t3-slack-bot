@@ -9,8 +9,8 @@
 | Tue 04/21 | Alan Zhang        | Led coding for lab01 and assigned project to-do        | 
 | Thu 04/24 | Adarsha Poudel    | Led the completion of lab01                            | 
 | Mon 04/27 | Kourosh Safari    | Discussed plans for Slack app                          | 
-| Tue 04/28 | Kourosh Safari    | Led standup and discussion for private/public          |
-| Thu 04/30 | Adarsha Poudel    | TBD                                                    | 
+| Tue 04/28 | Kourosh Safari    | Reviewed Kanban board and setup API                    |
+| Thu 04/30 | Adarsha Poudel    | Led standup and discussion for private/public          | 
 | Mon 05/04 | Tommy Chao        | Retro leader                                           | 
 | Tue 05/05 | Alan Zhang        | Leader for Sprint Goal                                 | 
 | Thu 04/07 | Kourosh Safari    | demo of MVP                                            |
