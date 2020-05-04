@@ -11,6 +11,12 @@
 | Mon 04/27 | Kourosh Safari    | Discussed plans for Slack app                          | 
 | Tue 04/28 | Kourosh Safari    | Reviewed Kanban board and setup API                    |
 | Thu 04/30 | Adarsha Poudel    | Led standup and discussion for private/public          | 
+| Mon 05/04 | Tommy Chao        | TBD                                                    | 
+| Tue 05/05 | Alan Zhang        | TBD                                                    | 
+| Thu 04/07 | Kourosh Safari    | TBD                                                    |
 | Mon 05/04 | Tommy Chao        | Retro leader                                           | 
 | Tue 05/05 | Alan Zhang        | Leader for Sprint Goal                                 | 
 | Thu 04/07 | Kourosh Safari    | demo of MVP                                            |
+| Mon 05/04 | Tommy Chao        | TBD                                                    | 
+| Tue 05/05 | Alan Zhang        | TBD                                                    | 
+| Thu 04/07 | Kourosh Safari    | TBD                                                    |
