@@ -8,8 +8,8 @@ app.post("/", (req, res) => {
   var data = {
     form: {
       token: process.env.SLACK_AUTH_TOKEN,
-      channel: "#general",
-      text: "Hi! :wave: \n I'm your new bot.",
+      channel: "#testing",
+      text: "This is the command /hello!",
     },
   };
   request.post("https://slack.com/api/chat.postMessage", data, function (
