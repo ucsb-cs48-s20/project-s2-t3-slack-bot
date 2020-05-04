@@ -7,7 +7,7 @@ export default async function (req, res) {
     form: {
       token: process.env.SLACK_AUTH_TOKEN,
       channel: "#testing",
-      text: "Hi! :wave: \n I'm your new bot.",
+      text: "/appraise has been called!",
     },
   };
   // Sends var data to Slack
