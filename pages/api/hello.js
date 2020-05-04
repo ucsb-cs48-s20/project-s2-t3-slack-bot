@@ -21,5 +21,5 @@ app.post("/", (req, res) => {
     res.json();
   });
   // Sends private message to user that called command
-  res.end("A hello has been sent to the testing channel! Check it out!");
+  // res.end("A hello has been sent to the testing channel! Check it out!");
 });
