@@ -7,12 +7,9 @@ export default async function (req, res) {
     form: {
       token: process.env.SLACK_AUTH_TOKEN,
       channel: "#testing",
-      text: "This is the command /appraise!",
+      text: "Hi! :wave: \n I'm your new bot.",
     },
   };
   await request.post("https://slack.com/api/chat.postMessage", data);
-  console.log(data);
-  res.statusCode = 200;
-  res.setHeader("Content-Type", "application/json");
-  res.end(JSON.stringify({ name: "John Doe" }));
+  res.end("Information of user inserted here");
 }

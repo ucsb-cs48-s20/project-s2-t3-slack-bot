@@ -9,7 +9,7 @@ app.post("/", (req, res) => {
     form: {
       token: process.env.SLACK_AUTH_TOKEN,
       channel: "#testing",
-      text: "This is the command /hello!",
+      text: "/hello has been called!",
     },
   };
   request.post("https://slack.com/api/chat.postMessage", data, function (
@@ -20,4 +20,5 @@ app.post("/", (req, res) => {
     // Sends welcome message
     res.json();
   });
+  res.end("A hello has been sent to the testing channel! Check it out!");
 });
