@@ -1,5 +1,14 @@
 require("dotenv").config();
 
+function mongodb_uri() {
+  if (process.env.NODE_ENV === "production") {
+    return process.env.MONGODB_URI_PRODUCTION;
+  } else if (process.env.NODE_ENV === "staging") {
+    return process.env.MONGODB_URI_STAGING;
+  }
+  return process.env.MONGODB_URI;
+}
+
 module.exports = {
   env: {
     AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,
@@ -17,6 +26,7 @@ module.exports = {
       process.env.SESSION_COOKIE_SECRET ||
       "viloxyf_z2GW6K4CT-KQD_MoLEA2wqv5jWuq4Jd0P7ymgG5GJGMpvMneXZzhK3sL",
     SESSION_COOKIE_LIFETIME: 7200, // 2 hours
-    SLACK_AUTH_TOKEN: process.env.SLACK_AUTH_TOKEN, 
+    SLACK_AUTH_TOKEN: process.env.SLACK_AUTH_TOKEN,
+    MONGODB_URI: mongodb_uri(),
   },
 };
