@@ -2,9 +2,9 @@ require("dotenv").config();
 
 const request = require("request");
 
-export default async function (req, res) {
-  console.log("Command Hello");
-  console.log("Token:" + process.env.SLACK_AUTH_TOKEN);
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.post("/", (req, res) => {
   var data = {
     form: {
       token: process.env.SLACK_AUTH_TOKEN,
@@ -12,13 +12,12 @@ export default async function (req, res) {
       text: "Hi! :wave: \n I'm your new bot.",
     },
   };
-  // await request.post({
-  //   uri: "https://slack.com/api/chat.postMessage",
-  //   body: data,
-  //   json: true,
-  // });
-  await request.post("https://slack.com/api/chat.postMessage", data);
-  res.statusCode = 200;
-  res.setHeader("Content-Type", "application/json");
-  res.end(JSON.stringify({ name: "John Doe" }));
-}
+  request.post("https://slack.com/api/chat.postMessage", data, function (
+    error,
+    response,
+    body
+  ) {
+    // Sends welcome message
+    res.json();
+  });
+});
