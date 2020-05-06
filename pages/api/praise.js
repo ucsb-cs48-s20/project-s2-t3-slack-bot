@@ -18,6 +18,7 @@ export default async function (req, res) {
           $set: { praiseValue: query.praiseValue + 1 },
         });
         console.log(`Successfully updated item with _id: ${query._id}`);
+        res.end(userName.slice(1) + " has been praised.");
       } catch (err) {
         console.error(`Failed to update item: ${err}`);
       }
@@ -28,14 +29,11 @@ export default async function (req, res) {
       };
       try {
         await usersCollection.insertOne(newUser);
-        console.log(
-          `Successfully inserted item with _id: ${result.insertedId}`
-        );
+        console.log(`Successfully inserted item with _id: ${query._id}`);
+        res.end(userName.slice(1) + " has been praised.");
       } catch (err) {
         console.error(`Failed to insert item: ${err}`);
       }
-
-      res.end(userName.slice(1) + " has been praised.");
     }
   }
 }
