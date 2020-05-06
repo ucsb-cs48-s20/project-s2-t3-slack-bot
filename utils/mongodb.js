@@ -11,6 +11,7 @@ export async function initDatabase() {
     await client.connect();
     connected = true;
   }
+  console.log(process.env.MONGODB_URI);
   console.log("connected to mongoDB");
   return client.db("database");
 }
