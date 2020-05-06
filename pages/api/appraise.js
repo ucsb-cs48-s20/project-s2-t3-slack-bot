@@ -1,17 +1,24 @@
 require("dotenv").config();
-
 const request = require("request");
+import { initDatabase } from "../../utils/mongodb";
 
 export default async function (req, res) {
-  var data = {
-    form: {
-      token: process.env.SLACK_AUTH_TOKEN,
-      channel: "#testing",
-      text: "/appraise has been called!",
-    },
-  };
-  // Sends var data to Slack
-  await request.post("https://slack.com/api/chat.postMessage", data);
-  // Sends var data to Slack
-  res.end("Information of user inserted here");
+  let userName = req.body.text;
+
+  if (!userName || userName.trim() === "") {
+    res.end("Please tag the person you want to view :)");
+  } else {
+    const client = await initDatabase();
+    const usersCollection = client.collection("users");
+    const query = await usersCollection.findOne({ name: userName });
+
+    if (query.praiseValue != 0) {
+      console.log("Successfully found user");
+      res.end(
+        userName.slice(1) + " has " + query.praiseValue.toString(10) + " rep!"
+      );
+    } else {
+      res.end(userName.slice(1) + " has no rep. :(");
+    }
+  }
 }
