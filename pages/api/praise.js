@@ -29,6 +29,7 @@ export default async function (req, res) {
       };
       try {
         await usersCollection.insertOne(newUser);
+        let query = await usersCollection.findOne({ name: userName });
         console.log(`Successfully inserted item with _id: ${query._id}`);
         res.end(userName.slice(1) + " has been praised.");
       } catch (err) {
