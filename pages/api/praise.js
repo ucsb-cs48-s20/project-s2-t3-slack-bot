@@ -4,7 +4,7 @@ import { initDatabase } from "../../utils/mongodb";
 
 export default async function (req, res) {
   let userName = req.body.text;
-
+  if(userName.slice(1) == req.body.user_name){res.end('You cannot praise yourself, silly.')}
   if (!userName || userName.trim() === "") {
     res.end("Please tag the person you want to praise :)");
   } else {
