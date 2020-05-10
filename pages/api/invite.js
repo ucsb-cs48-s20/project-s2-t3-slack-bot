@@ -1,8 +1,10 @@
 //callback(?) for bot invitation
 
+//require("dotenv").config();
+
 // Import express and request modules
-var express = require("express");
-var request = require("request");
+import express from "express";
+import request from "request";
 
 // Instantiates Express and assigns our app variable to it
 var app = express();
