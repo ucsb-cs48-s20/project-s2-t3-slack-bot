@@ -37,7 +37,7 @@ export default async function (req, res) {
       } else {
         console.log(JSONresponse);
         res.send(
-          "<p>Success! <a href=../>Click here</a> to go back to the homepage.</p>"
+          "<meta http-equiv='refresh' content='3;url=../' /> <p>Success! <a href='../'>Click here</a> to go back to the homepage if you are not redirected automatically.</p>"
         );
       }
     });
