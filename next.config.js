@@ -27,6 +27,10 @@ module.exports = {
       "viloxyf_z2GW6K4CT-KQD_MoLEA2wqv5jWuq4Jd0P7ymgG5GJGMpvMneXZzhK3sL",
     SESSION_COOKIE_LIFETIME: 7200, // 2 hours
     SLACK_AUTH_TOKEN: process.env.SLACK_AUTH_TOKEN,
+    SLACK_CLIENT_ID: process.env.SLACK_CLIENT_ID,
+    SLACK_CLIENT_SECRET: process.env.SLACK_CLIENT_SECRET,
+    SLACK_VERIFICATION_TOKEN: process.env.SLACK_VERIFICATION_TOKEN,
+    SLACK_REDIRECT_URI: process.env.SLACK_REDIRECT_URI,
     MONGODB_URI: mongodb_uri(),
   },
 };

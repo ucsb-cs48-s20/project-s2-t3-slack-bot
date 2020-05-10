@@ -9,7 +9,7 @@ function HomePage(props) {
   return (
     <Layout user={user}>
       <div>The bot has been added to your workspace!</div>
-      <br></br>
+
       <br></br>
       {user ? (
         <div>
