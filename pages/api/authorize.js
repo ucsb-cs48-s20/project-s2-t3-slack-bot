@@ -2,8 +2,8 @@ require("dotenv").config();
 const request = require("request");
 
 export default async function (req, res) {
-  console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-  console.log(req.headers.host);
+  //console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+  //console.log(req.headers.host);
 
   // When a user authorizes an app, a code query parameter is passed on the oAuth endpoint. If that code is not there, we respond with an error message
   if (!req.query.code) {
@@ -36,11 +36,10 @@ export default async function (req, res) {
           .end();
       } else {
         console.log(JSONresponse);
-        res.set("Content-Type", "text/html");
         res.send(
-          new Buffer(
-            "Success! <a href='https://cs48-s20-s2-t3-qa.herokuapp.com/'>Click here</a> to go back to the homepage."
-          )
+          "<p>Success! <a href=" +
+            req.headers.host +
+            ">Click here</a> to go back to the homepage.</p>"
         );
       }
     });
