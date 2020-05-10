@@ -1,13 +1,5 @@
-//callback(?) for bot invitation
-
 require("dotenv").config();
-
-// Import express and request modules
-//const express = require("express");
 const request = require("request");
-
-// Instantiates Express and assigns our app variable to it
-//var app = express();
 
 export default async function (req, res) {
   // When a user authorizes an app, a code query parameter is passed on the oAuth endpoint. If that code is not there, we respond with an error message
@@ -41,7 +33,9 @@ export default async function (req, res) {
           .end();
       } else {
         console.log(JSONresponse);
-        res.send("Success!");
+        res.send(
+          "Success! <a href='https://cs48-s20-s2-t3-qa.herokuapp.com/'>Click here</a> to go back to the homepage."
+        );
       }
     });
   }
