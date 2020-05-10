@@ -2,7 +2,8 @@ require("dotenv").config();
 const request = require("request");
 
 export default async function (req, res) {
-  console.log(req);
+  console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+  console.log(req.headers.host);
 
   // When a user authorizes an app, a code query parameter is passed on the oAuth endpoint. If that code is not there, we respond with an error message
   if (!req.query.code) {
