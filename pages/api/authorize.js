@@ -23,11 +23,11 @@ export default async function (req, res) {
         "https://slack.com/api/oauth.v2.access?code=" +
         req.query.code +
         "&client_id=" +
-        SLACK_CLIENT_ID +
+        process.env.SLACK_CLIENT_ID +
         "&client_secret=" +
-        SLACK_CLIENT_SECRET +
+        process.env.SLACK_CLIENT_SECRET +
         "&redirect_uri=" +
-        SLACK_REDIRECT_URI,
+        process.env.SLACK_REDIRECT_URI,
       method: "GET",
     };
 
