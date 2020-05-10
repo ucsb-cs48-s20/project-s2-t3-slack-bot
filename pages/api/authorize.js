@@ -33,8 +33,11 @@ export default async function (req, res) {
           .end();
       } else {
         console.log(JSONresponse);
+        res.set("Content-Type", "text/html");
         res.send(
-          "Success! <a href='https://cs48-s20-s2-t3-qa.herokuapp.com/'>Click here</a> to go back to the homepage."
+          new Buffer(
+            "Success! <a href='https://cs48-s20-s2-t3-qa.herokuapp.com/'>Click here</a> to go back to the homepage."
+          )
         );
       }
     });
