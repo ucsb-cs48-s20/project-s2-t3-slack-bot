@@ -37,9 +37,7 @@ export default async function (req, res) {
       } else {
         console.log(JSONresponse);
         res.send(
-          "<p>Success! <a href=" +
-            req.headers.host +
-            ">Click here</a> to go back to the homepage.</p>"
+          "<p>Success! <a href=../>Click here</a> to go back to the homepage.</p>"
         );
       }
     });
