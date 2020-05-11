@@ -25,17 +25,23 @@
   => Make sure you covered everything that needs to be discussed within the team.
   
   
-# Retro 05/04/20
+# Retro 05/11/20
 
-* Led by: name-goes-here
-* Present: name1, name2, ... , nameN
-* Absent: name1, name2, ...
+* Led by: Tommy Chao
+* Present: Tommy Chao, Alan Zhang, Adarsha Poudel, Kourosh Safari
+* Absent: 
 
 ## Action item
 
-* a goal: identify something the team wants to get better at
-* a change: identify one thing that the team will change about how it works together
-* a measurement: identify at least one way to measure whether the change helped the team acheive the goal, or move closer to it.
+* a goal: Using kanban board more actively
+* a change: Instead of speaking about what we are doing, use the kanban board to convey 
+* a measurement: Number of updates on the kanban board
+
+## Action item
+
+* a goal: Equal communication and contribution
+* a change: Understand what's going on and ask questions so that we have the confidence to talk
+* a measurement: Overall feeling 
 
 ## Brief description of how retro went
 
