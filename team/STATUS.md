@@ -1,3 +1,28 @@
+# Sprint Planning, 05/12/2020
+  
+* Leader: Alan Zhang
+* Present: all 
+* Absent: none
+ 
+## Sprint Goal for 05/12-05/21
+  
+Which of the 10 powerful questions did you ask?
+If we were paying for this Sprint with our own money, what work would give us the highest chance to get that money back?
+  
+Describe your sprint goal here.
+We will be working in groups of two to combat problems that we experienced individually. We will also
+be working on important features like leaderboard, roles, and economical integrity of the reputation system. 
+
+Describe briefly how you came up with that goal.
+We came up with the goal by talking about what features would finalize our product. 
+  
+## Discussion of previous Sprint Goal
+  
+Briefly: was the sprint goal acheived?  Was it too ambitious?  Too modest? 
+Our sprint goal was achieved. The goal was the perfect difficulty for our group. We did not
+expect building the foundation of the project to be so hard. Although at first glance we thought
+the goal was easy, it was actually fairly difficult.
+
 # Status, Monday 04/27/2020
 
 ## Sprint Goal for Monday 04/27 through Monday 05/04
