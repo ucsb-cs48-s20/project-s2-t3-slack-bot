@@ -10,11 +10,17 @@ Which of the 10 powerful questions did you ask?
 If we were paying for this Sprint with our own money, what work would give us the highest chance to get that money back?
   
 Describe your sprint goal here.
-We will be working in groups of two to combat problems that we experienced individually. We will also
+We will be working in groups of two to combat problems that we experienced individually. We scheduled meetings
+for our respective groups and will continue doing it this way if our coding method works out. We will also
 be working on important features like leaderboard, roles, and economical integrity of the reputation system. 
 
 Describe briefly how you came up with that goal.
-We came up with the goal by talking about what features would finalize our product. 
+We came up with the goal by talking about what features would perfect/finalize our product. 
+
+Summary of discussion:
+We talked about changing up what we did when completing the MVP. Then, we scheduled times to work together.
+Finally, we went back to answer one of the 10 powerful questions. We organized the Kanban board while discussing
+what features would be most effective for our product to be popular. 
   
 ## Discussion of previous Sprint Goal
   
