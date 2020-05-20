@@ -12,7 +12,7 @@ const web = new WebClient(token);
 var userInput;
 
 // Toggle for UTC offset (because deploying to heroku resets the times to UTC ???)
-var UTCOffset = true;
+var UTCOffset = false;
 
 export default async function (req, res) {
   // Assign userInput with the user input
