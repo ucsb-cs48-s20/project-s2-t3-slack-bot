@@ -204,6 +204,14 @@ async function scheduleList(req, res, userInput) {
       //channel: req.body.channel_id, // This parameter can be used to specify what channel to only retrieve reminders from
     });
 
+    // Check to see if there are any scheduled reminders
+    if (result.scheduled_messages.length == 0) {
+      // Tell user there are no reminders, if this is the case
+      res.end(
+        "There are currently no scheduled reminders. You can add a reminder by using `/schedule add`."
+      );
+    }
+
     // Declare a string variable to write all scheduled reminders to
     var scheduledRemindersList = "*Here is the list of scheduled reminders:*\n";
 
@@ -367,7 +375,7 @@ function validateUserInputParameter(
         return (
           "Your input for `minute` was out of range. You entered `/schedule " +
           userInput +
-          "`. Please enter a `minute` between 1 and 59."
+          "`. Please enter a `minute` between 00 and 59."
         );
       }
       return "Valid value";
