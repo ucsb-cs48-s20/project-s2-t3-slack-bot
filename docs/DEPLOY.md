@@ -45,9 +45,13 @@ the the following:
 The short description and usage hint doesn't impact how the command works, so feel free to skip that step.
 
 
-# Add the following Bot Token Scopes in your Slack application
+# Add the following Redirect URLs and Bot Token Scopes in your Slack application
+
 Return to the home page. Now, go to the "OAuth & Permissions" tab.
-![](images/scopeHelp1.png)
+<br/>![](images/scopeHelp1.png)
+
+<br/>Click on "Add New Redirect URL" and your redirect URL. An example of what the website should look like is cgaucho.herokuapp.com/api/authorize
+<br/>![](images/scopeHelp3.png)
 
 <br/> Then, scroll down until you get to the box named "Scopes". Click on OAuth Scopes and add the scopes in the following image:
-![](images/scopeHelp2.png)
+<br/>![](images/scopeHelp2.png)
