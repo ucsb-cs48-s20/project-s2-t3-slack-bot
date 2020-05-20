@@ -1,6 +1,6 @@
 ## Name of the project: Slack Bot
 
-* [Deployment Instructions](https://github.com/ucsb-cs48-s20/project-s2-t3-slack-bot/blob/master/docs/DEPLOY.md)
+- [Deployment Instructions](https://github.com/ucsb-cs48-s20/project-s2-t3-slack-bot/blob/master/docs/DEPLOY.md)
 
 ## Description:
 

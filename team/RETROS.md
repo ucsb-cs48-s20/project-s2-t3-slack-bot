@@ -23,30 +23,29 @@
   => It was a productive session that helped all the team members be more comfortable about sharing ideas with each other.
 - What advice would you give to the next person leading a retro based on what you learned today?  
   => Make sure you covered everything that needs to be discussed within the team.
-  
-  
+
 # Retro 05/11/20
 
-* Led by: Tommy Chao
-* Present: (everyone) Tommy Chao, Alan Zhang, Adarsha Poudel, Kourosh Safari
+- Led by: Tommy Chao
+- Present: (everyone) Tommy Chao, Alan Zhang, Adarsha Poudel, Kourosh Safari
 
 ## Action item
 
-* a goal: Using kanban board more actively
-* a change: Instead of speaking about what we are doing, use the kanban board to convey 
-* a measurement: Number of updates on the kanban board
+- a goal: Using kanban board more actively
+- a change: Instead of speaking about what we are doing, use the kanban board to convey
+- a measurement: Number of updates on the kanban board
 
 ## Action item
 
-* a goal: Equal communication and contribution
-* a change: Understand what's going on and ask questions so that we have the confidence to talk
-* a measurement: Overall feeling 
+- a goal: Equal communication and contribution
+- a change: Understand what's going on and ask questions so that we have the confidence to talk
+- a measurement: Overall feeling
 
 ## Brief description of how retro went
 
 Retro leader fill this in.
 
-* A brief description of what retro outline or process you used: I used the start/stop/continue process.
-* A brief assessment of how it went. It went fairly well. We discussed what we should start doing as a team, especially highlighting the need for equal team and individual contributions.
-* What advice would you give to the next person leading a retro
+- A brief description of what retro outline or process you used: I used the start/stop/continue process.
+- A brief assessment of how it went. It went fairly well. We discussed what we should start doing as a team, especially highlighting the need for equal team and individual contributions.
+- What advice would you give to the next person leading a retro
   based on what you learned today? If you plan to use start/stop/continue, have an organized way to go though what everyone contributed. Also, don't be afraid to say what needs to be said regarding the team dynamic.
