@@ -187,9 +187,9 @@ async function scheduleCreate(req, res, userInput) {
   } catch (error) {
     // Send message (visible only to person who scheduled) that the scheduled reminder was NOT successfully created
     res.end(
-      "Error creating scheduled reminder at date " +
+      "Error creating scheduled reminder for `" +
         dateInFuture.toLocaleString() +
-        ". You can only schedule a reminder 120 days in advance and cannot schedule a reminder for the past."
+        "`. Remember you can only schedule a reminder 120 days in advance and cannot schedule a reminder for the past."
     );
     console.error(error);
   }
