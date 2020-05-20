@@ -11,6 +11,9 @@ const web = new WebClient(token);
 // Declare global variable for user input
 var userInput;
 
+// Toggle for UTC offset (because deploying to heroku resets the times to UTC ???)
+var UTCOffset = true;
+
 export default async function (req, res) {
   // Assign userInput with the user input
   userInput = req.body.text;
@@ -151,19 +154,37 @@ async function scheduleAdd(req, res, userInput) {
     mDYHMAMUserInputArray[1]
   );
   if (mDYHMAMUserInputArray[5].toLowerCase() == "pm") {
-    dateInFuture.setHours(
-      parseInt(mDYHMAMUserInputArray[3]) + 12,
-      mDYHMAMUserInputArray[4],
-      0,
-      0
-    );
+    if (UTCOffset) {
+      dateInFuture.setHours(
+        parseInt(mDYHMAMUserInputArray[3]) + 12 - 7,
+        mDYHMAMUserInputArray[4],
+        0,
+        0
+      );
+    } else {
+      dateInFuture.setHours(
+        parseInt(mDYHMAMUserInputArray[3]) + 12,
+        mDYHMAMUserInputArray[4],
+        0,
+        0
+      );
+    }
   } else {
-    dateInFuture.setHours(
-      mDYHMAMUserInputArray[3],
-      mDYHMAMUserInputArray[4],
-      0,
-      0
-    );
+    if (UTCOffset) {
+      dateInFuture.setHours(
+        mDYHMAMUserInputArray[3] - 7,
+        mDYHMAMUserInputArray[4],
+        0,
+        0
+      );
+    } else {
+      dateInFuture.setHours(
+        mDYHMAMUserInputArray[3],
+        mDYHMAMUserInputArray[4],
+        0,
+        0
+      );
+    }
   }
 
   try {
