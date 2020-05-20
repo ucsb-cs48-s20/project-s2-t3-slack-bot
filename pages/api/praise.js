@@ -4,14 +4,16 @@ import { initDatabase } from "../../utils/mongodb";
 
 export default async function (req, res) {
   let userName = req.body.text;
-  if(userName.slice(1) == req.body.user_name){res.end('You cannot praise yourself, silly.')}
+  if (userName.slice(1) == req.body.user_name) {
+    res.end("You cannot praise yourself, silly.");
+  }
   if (!userName || userName.trim() === "") {
     res.end("Please tag the person you want to praise :)");
   } else {
     const client = await initDatabase();
     const usersCollection = client.collection("users");
     const query = await usersCollection.findOne({ name: userName });
-  if(userName.slice(1) != req.body.user_name){
+    if (userName.slice(1) != req.body.user_name) {
       if (query) {
         try {
           await usersCollection.updateOne(query, {
