@@ -8,9 +8,12 @@ const token = process.env.SLACK_AUTH_TOKEN;
 // Initialize a web client
 const web = new WebClient(token);
 
+// Declare global variable for user input
+var userInput;
+
 export default async function (req, res) {
-  // Get the user input as a string
-  var userInput = req.body.text;
+  // Assign userInput with the user input
+  userInput = req.body.text;
 
   // Get the first word of their input
   var scheduleCommand;
@@ -44,36 +47,139 @@ export default async function (req, res) {
   }
 }
 
-// Usage: /schedule create [month] [day] [year] [hour] [minute] [am/pm] [message]
+// Usage: /schedule create [month] [day] [year] [hour] [minute] [AM/PM] [message]
 // e.g.   /schedule create 5 19 2020 3 20 pm @channel class starting in 10 minutes
+// "mDYHMAM" whereever it appears in the code stands for "month", "day", "year", "hour", "minute", "am/pm", and "message"
 async function scheduleCreate(req, res, userInput) {
-  // Create a date object to manipulate time
-  let date = new Date();
+  /*
+  // Get list of users for whenever the message contains an @
+  const userList = await web.users.list({
+    token: process.env.SLACK_AUTH_TOKEN,
+  });
+  
+  console.log(userList);
+  */
 
-  // Create a date in the future based on numOfSecondsInTheFuture (this should be user input somehow)
-  let numOfSecondsInTheFuture = 1200; // Minimum time is 5-10(?) seconds (unsure why this is the case)
-  var dateInFuture = new Date(date.getTime());
-  dateInFuture.setSeconds(dateInFuture.getSeconds() + numOfSecondsInTheFuture);
+  // Hard-coded strings for printing in error messages
+  var mDYHMAMStringArray = [
+    "month",
+    "day",
+    "year",
+    "hour",
+    "minute",
+    "am/pm",
+    "message",
+  ];
+
+  // Check to see if they didn't enter anything past the word "create"
+  if (userInput.indexOf(" ") == -1) {
+    res.end(
+      "You can create a reminder using this syntax: `/schedule create [month] [day] [year] [hour] [minute] [AM/PM] [message]`. Type `/schedule help` for more info."
+    );
+  }
+
+  // Get the user input past the text "/schedule create "
+  var timeAndMessageString = userInput.substring(userInput.indexOf(" ") + 1);
+
+  // Go through user input and fill the array in
+  // The order of elements in the array are: month, day, year, hour, minute, am/pm, message
+  var mDYHMAMUserInputArray = [];
+  for (var i = 0; i < 6; i++) {
+    // If they didn't input enough parameters
+    if (timeAndMessageString.indexOf(" ") == -1) {
+      res.end(
+        "You did not enter enough parameters. You entered `/schedule " +
+          userInput +
+          "`.\nYou can create a reminder using this syntax: `/schedule create [month] [day] [year] [hour] [minute] [AM/PM] [message]`. Type `/schedule help` for more info."
+      );
+    }
+
+    // Find the next string that is split by a space and push it to mDYHMAMUserInputArray
+    mDYHMAMUserInputArray.push(
+      timeAndMessageString.substring(0, timeAndMessageString.indexOf(" "))
+    );
+    timeAndMessageString = timeAndMessageString.substring(
+      timeAndMessageString.indexOf(" ") + 1
+    );
+  }
+
+  // Push timeAndMessageString into user input array, which the string should now just be the message
+  mDYHMAMUserInputArray.push(timeAndMessageString);
+
+  // Validate the six time variables
+  for (var j = 0; j < 6; j++) {
+    // Check to see if the month/day/year/hour/minute value is a number
+    if (j < 5 && isNaN(mDYHMAMUserInputArray[j])) {
+      res.end(
+        "Your input for `" +
+          mDYHMAMStringArray[j] +
+          "` was not a number. You entered `/schedule " +
+          userInput +
+          "`. Please try again."
+      );
+    }
+
+    // Check to see if the values are within their respective ranges (e.g. the month value is between 1 and 12)
+    var potentialErrorMessage = validateUserInputParameter(
+      mDYHMAMUserInputArray[j],
+      mDYHMAMStringArray,
+      mDYHMAMStringArray[j]
+    );
+    if (potentialErrorMessage != "Valid value") {
+      res.end(potentialErrorMessage);
+    }
+  }
+
+  // Reformatting of @channel/@here
+  mDYHMAMUserInputArray[6] = mDYHMAMUserInputArray[6].replace(
+    /@channel/g,
+    "<!channel>"
+  );
+  mDYHMAMUserInputArray[6] = mDYHMAMUserInputArray[6].replace(
+    /@here/g,
+    "<!here>"
+  );
+
+  // Create date object using mDYHMAMUserInputArray parameters
+  var dateInFuture = new Date();
+  dateInFuture.setFullYear(
+    mDYHMAMUserInputArray[2],
+    mDYHMAMUserInputArray[0] - 1,
+    mDYHMAMUserInputArray[1]
+  );
+  if (mDYHMAMUserInputArray[5].toLowerCase() == "pm") {
+    dateInFuture.setHours(
+      parseInt(mDYHMAMUserInputArray[3]) + 12,
+      mDYHMAMUserInputArray[4],
+      0,
+      0
+    );
+  } else {
+    dateInFuture.setHours(
+      mDYHMAMUserInputArray[3],
+      mDYHMAMUserInputArray[4],
+      0,
+      0
+    );
+  }
 
   try {
-    // Create the scheduled message that gets posted numOfSecondsInTheFuture seconds into the future
+    // Create the scheduled message that gets posted at dateInFuture's time
     const result = await web.chat.scheduleMessage({
       token: process.env.SLACK_AUTH_TOKEN,
       channel: req.body.channel_id,
-      text:
-        "Hello <@" +
-        req.body.user_id +
-        ">! Here is a message you scheduled to send at " +
-        dateInFuture.toLocaleString() +
-        ".",
+      // prettier-ignore
+      text: mDYHMAMUserInputArray[6],
       post_at: dateInFuture.getTime() / 1000,
     });
 
     // Send message (visible only to person who scheduled) that the scheduled reminder was successfully created
     res.end(
-      "Scheduled reminder for " +
+      "Successfully scheduled reminder `" +
+        mDYHMAMUserInputArray[6] +
+        "` for `" +
         dateInFuture.toLocaleString() +
-        " successfully created."
+        "`."
     );
   } catch (error) {
     // Send message (visible only to person who scheduled) that the scheduled reminder was NOT successfully created
@@ -189,7 +295,7 @@ async function scheduleHelp(req, res, userInput) {
   // Build the help message
   helpString += "*Here is the list of *`/schedule` *commands:*\n";
   helpString +=
-    ">• `/schedule create [month] [day] [year] [hour] [minute] [am/pm] [message]`\n";
+    ">• `/schedule create [month] [day] [year] [hour] [minute] [AM/PM] [message]`\n";
   helpString +=
     ">     *Creates a new reminder using the parameters given.* Note that reminders cannot be set more than 120 days in advance, or be set for the past.\n";
   helpString +=
@@ -214,4 +320,67 @@ function formScheduledRemindersListElement(scheduledMessageJSON, elementIndex) {
   var scheduledMessage = scheduledMessageJSON.text;
   // prettier-ignore
   return ">" + (elementIndex + 1) + ". [" + timeToPostAsString + " for <#" + channelToPostIn + ">]: " + scheduledMessage + "\n"
+}
+
+function validateUserInputParameter(
+  userInputForParameter,
+  mDYHMAMStringArray,
+  mDYHMAMStringArrayValue
+) {
+  switch (mDYHMAMStringArrayValue) {
+    case mDYHMAMStringArray[0]: // Month: Check to see if the month value is between 1 and 12
+      if (userInputForParameter < 1 || userInputForParameter > 12) {
+        return (
+          "Your input for `month` was out of range. You entered `/schedule " +
+          userInput +
+          "`. Please enter a `month` between 1 and 12."
+        );
+      }
+      return "Valid value";
+    case mDYHMAMStringArray[1]: // Day: Check to see if the day value is between 1 and 31
+      if (userInputForParameter < 1 || userInputForParameter > 31) {
+        return (
+          "Your input for `day` was out of range. You entered `/schedule " +
+          userInput +
+          "`. Please enter a `day` between 1 and 31."
+        );
+      }
+      return "Valid value";
+    case mDYHMAMStringArray[2]: // Year: Actually we don't need to check the year (as long as it's a number, which it is if we made it to this line of the code)
+      return "Valid value";
+    case mDYHMAMStringArray[3]: // Hour: Check to see if the hour value is between 1 and 12
+      if (userInputForParameter < 1 || userInputForParameter > 12) {
+        return (
+          "Your input for `hour` was out of range. You entered `/schedule " +
+          userInput +
+          "`. Please enter an `hour` between 1 and 12."
+        );
+      }
+      return "Valid value";
+    case mDYHMAMStringArray[4]: // Minute: Check to see if the minute value is between 00 and 59
+      if (userInputForParameter < 0 || userInputForParameter > 59) {
+        return (
+          "Your input for `minute` was out of range. You entered `/schedule " +
+          userInput +
+          "`. Please enter a `minute` between 1 and 59."
+        );
+      }
+      return "Valid value";
+    case mDYHMAMStringArray[5]: // AM/PM: Check to see if they put either am or pm (case insensitive)
+      if (
+        userInputForParameter.toLowerCase() != "am" &&
+        userInputForParameter.toLowerCase() != "pm"
+      ) {
+        return (
+          "Your input for `AM/PM` was invalid. You entered `/schedule " +
+          userInput +
+          "`. Please enter either `AM` or `PM`."
+        );
+      }
+      return "Valid value";
+    default:
+      res.end(
+        "If you are seeing this message, then the developers of this bot made a bug here! Error (1)"
+      );
+  }
 }
