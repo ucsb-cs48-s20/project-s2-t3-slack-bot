@@ -46,3 +46,8 @@ The short description and usage hint doesn't impact how the command works, so fe
 
 
 # Add the following Bot Token Scopes in your Slack application
+Return to the home page. Now, go to the "OAuth & Permissions" tab.
+![](images/scopeHelp1.png)
+
+<br/> Then, scroll down until you get to the box named "Scopes". Click on OAuth Scopes and add the scopes in the following image:
+![](images/scopeHelp2.png)
