@@ -25,14 +25,14 @@ export default async function (req, res) {
 
   // Go to different functions depending on user input of the first word
   switch (scheduleCommand) {
-    case "create":
-      scheduleCreate(req, res, userInput);
+    case "add":
+      scheduleAdd(req, res, userInput);
       break;
     case "list":
       scheduleList(req, res, userInput);
       break;
-    case "delete":
-      scheduleDelete(req, res, userInput);
+    case "remove":
+      scheduleRemove(req, res, userInput);
       break;
     case "":
     case "help":
@@ -47,10 +47,10 @@ export default async function (req, res) {
   }
 }
 
-// Usage: /schedule create [month] [day] [year] [hour] [minute] [AM/PM] [message]
-// e.g.   /schedule create 5 19 2020 3 20 pm @channel class starting in 10 minutes
+// Usage: /schedule add [month] [day] [year] [hour] [minute] [AM/PM] [message]
+// e.g.   /schedule add 5 19 2020 3 20 pm @channel class starting in 10 minutes
 // "mDYHMAM" whereever it appears in the code stands for "month", "day", "year", "hour", "minute", "am/pm", and "message"
-async function scheduleCreate(req, res, userInput) {
+async function scheduleAdd(req, res, userInput) {
   /*
   // Get list of users for whenever the message contains an @
   const userList = await web.users.list({
@@ -71,14 +71,14 @@ async function scheduleCreate(req, res, userInput) {
     "message",
   ];
 
-  // Check to see if they didn't enter anything past the word "create"
+  // Check to see if they didn't enter anything past the word "add"
   if (userInput.indexOf(" ") == -1) {
     res.end(
-      "You can create a reminder using this syntax: `/schedule create [month] [day] [year] [hour] [minute] [AM/PM] [message]`. Type `/schedule help` for more info."
+      "You can add a reminder using this syntax: `/schedule add [month] [day] [year] [hour] [minute] [AM/PM] [message]`. Type `/schedule help` for more info."
     );
   }
 
-  // Get the user input past the text "/schedule create "
+  // Get the user input past the text "/schedule add "
   var timeAndMessageString = userInput.substring(userInput.indexOf(" ") + 1);
 
   // Go through user input and fill the array in
@@ -90,7 +90,7 @@ async function scheduleCreate(req, res, userInput) {
       res.end(
         "You did not enter enough parameters. You entered `/schedule " +
           userInput +
-          "`.\nYou can create a reminder using this syntax: `/schedule create [month] [day] [year] [hour] [minute] [AM/PM] [message]`. Type `/schedule help` for more info."
+          "`.\nYou can add a reminder using this syntax: `/schedule add [month] [day] [year] [hour] [minute] [AM/PM] [message]`. Type `/schedule help` for more info."
       );
     }
 
@@ -130,7 +130,7 @@ async function scheduleCreate(req, res, userInput) {
     }
   }
 
-  // Reformatting of @channel/@here/@userThatCreatedTheReminder
+  // Reformatting of @channel/@here/@userThatAddedTheReminder
   mDYHMAMUserInputArray[6] = mDYHMAMUserInputArray[6].replace(
     /@channel/g,
     "<!channel>"
@@ -176,7 +176,7 @@ async function scheduleCreate(req, res, userInput) {
       post_at: dateInFuture.getTime() / 1000,
     });
 
-    // Send message (visible only to person who scheduled) that the scheduled reminder was successfully created
+    // Send message (visible only to person who scheduled) that the scheduled reminder was successfully added
     res.end(
       "Successfully scheduled reminder `" +
         mDYHMAMUserInputArray[6] +
@@ -185,9 +185,9 @@ async function scheduleCreate(req, res, userInput) {
         "`."
     );
   } catch (error) {
-    // Send message (visible only to person who scheduled) that the scheduled reminder was NOT successfully created
+    // Send message (visible only to person who scheduled) that the scheduled reminder was NOT successfully added
     res.end(
-      "Error creating scheduled reminder for `" +
+      "Error adding scheduled reminder for `" +
         dateInFuture.toLocaleString() +
         "`. Remember you can only schedule a reminder 120 days in advance and cannot schedule a reminder for the past."
     );
@@ -225,16 +225,16 @@ async function scheduleList(req, res, userInput) {
   }
 }
 
-// Usage: /schedule delete [reminder number], where [reminder number] is retrieved from /schedule list
-async function scheduleDelete(req, res, userInput) {
-  // Check to see if they didn't enter anything past the word "delete"
+// Usage: /schedule remove [reminder number], where [reminder number] is retrieved from /schedule list
+async function scheduleRemove(req, res, userInput) {
+  // Check to see if they didn't enter anything past the word "remove"
   if (userInput.indexOf(" ") == -1) {
     res.end(
-      "Please enter the number of the reminder from `/schedule list` you would like to delete. Example: `/schedule delete 3`"
+      "Please enter the number of the reminder from `/schedule list` you would like to remove. Example: `/schedule remove 3`"
     );
   }
 
-  // Get the user input past the text "/schedule delete "
+  // Get the user input past the text "/schedule remove "
   var inputReminderNumber = userInput.substring(userInput.indexOf(" ") + 1);
 
   // Check if the user input is NOT a number
@@ -262,7 +262,7 @@ async function scheduleDelete(req, res, userInput) {
     );
   }
 
-  // Now finally delete the reminder
+  // Now finally remove the reminder
   try {
     var reminderToBeDeleted =
       result.scheduled_messages[inputReminderNumber - 1];
@@ -272,7 +272,7 @@ async function scheduleDelete(req, res, userInput) {
       scheduled_message_id: reminderToBeDeleted.id,
     });
 
-    // Tell the user that the delete was successful
+    // Tell the user that the remove was successful
     var reminderDate = new Date(reminderToBeDeleted.post_at * 1000);
     var reminderToBeDeletedTimeAsString = reminderDate.toLocaleString();
     res.end(
@@ -280,12 +280,12 @@ async function scheduleDelete(req, res, userInput) {
         reminderToBeDeleted.text +
         "` scheduled for `" +
         reminderToBeDeletedTimeAsString +
-        "` was successfully deleted.*"
+        "` was successfully removed.*"
     );
   } catch (error) {
     // Send error message to user
     res.end(
-      "Error deleting reminder. Perhaps you tried to delete a reminder that is about to be sent?"
+      "Error removing reminder. Perhaps you tried to remove a reminder that is about to be sent?"
     );
   }
 }
@@ -298,19 +298,19 @@ async function scheduleHelp(req, res, userInput) {
   // Build the help message
   helpString += "*Here is the list of *`/schedule` *commands:*\n";
   helpString +=
-    ">• `/schedule create [month] [day] [year] [hour] [minute] [AM/PM] [message]`\n";
+    ">• `/schedule add [month] [day] [year] [hour] [minute] [AM/PM] [message]`\n";
   helpString +=
-    ">     *Creates a new reminder using the parameters given.* Reminders cannot be set more than 120 days in advance, or be set for the past.\n";
+    ">     *Adds a new reminder using the parameters given.* Reminders cannot be set more than 120 days in advance, or be set for the past.\n";
   helpString +=
-    ">     At the moment, the only @mentions available are <!channel>, <!here>, and *@[the person who created the reminder]*.\n";
+    ">     At the moment, the only @mentions available are <!channel>, <!here>, and *@[the person who added the reminder]*.\n";
   helpString +=
-    ">         *Example:* /schedule create 5 21 2020 4 50 pm Class is starting in 10 minutes! <!channel> Today is demo day!\n\n";
+    ">         *Example:* /schedule add 5 21 2020 4 50 pm Class is starting in 10 minutes! <!channel> Today is demo day!\n\n";
   helpString += ">• `/schedule list`\n";
   helpString += ">     *Shows a list of all existing reminders.*\n\n";
-  helpString += ">• `/schedule delete [reminder number]`\n";
+  helpString += ">• `/schedule remove [reminder number]`\n";
   helpString +=
-    ">     *Deletes a reminder using the numbers from* `/schedule list`. Note that you cannot delete a reminder that will be posted within 60 seconds of the delete request.\n";
-  helpString += ">         *Example:* /schedule delete 2\n\n";
+    ">     *Removes a reminder using the numbers from* `/schedule list`. Note that you cannot remove a reminder that will be posted within 60 seconds of the remove request.\n";
+  helpString += ">         *Example:* /schedule remove 2\n\n";
   helpString += ">• `/schedule help`\n";
   helpString += ">     *Displays this list of commands.*\n";
 
