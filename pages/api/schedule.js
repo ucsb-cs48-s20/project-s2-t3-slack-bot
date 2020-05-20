@@ -130,7 +130,7 @@ async function scheduleCreate(req, res, userInput) {
     }
   }
 
-  // Reformatting of @channel/@here
+  // Reformatting of @channel/@here/@userThatCreatedTheReminder
   mDYHMAMUserInputArray[6] = mDYHMAMUserInputArray[6].replace(
     /@channel/g,
     "<!channel>"
@@ -139,6 +139,9 @@ async function scheduleCreate(req, res, userInput) {
     /@here/g,
     "<!here>"
   );
+  mDYHMAMUserInputArray[6] = mDYHMAMUserInputArray[6]
+    .split("@" + req.body.user_name)
+    .join("<@" + req.body.user_id + ">");
 
   // Create date object using mDYHMAMUserInputArray parameters
   var dateInFuture = new Date();
@@ -297,9 +300,11 @@ async function scheduleHelp(req, res, userInput) {
   helpString +=
     ">• `/schedule create [month] [day] [year] [hour] [minute] [AM/PM] [message]`\n";
   helpString +=
-    ">     *Creates a new reminder using the parameters given.* Note that reminders cannot be set more than 120 days in advance, or be set for the past.\n";
+    ">     *Creates a new reminder using the parameters given.* Reminders cannot be set more than 120 days in advance, or be set for the past.\n";
   helpString +=
-    ">         *Example:* /schedule create 5 21 2020 4 50 pm <!channel> Class is starting in 10 minutes!\n\n";
+    ">     At the moment, the only @mentions available are <!channel>, <!here>, and *@[the person who created the reminder]*.\n";
+  helpString +=
+    ">         *Example:* /schedule create 5 21 2020 4 50 pm Class is starting in 10 minutes! <!channel> Today is demo day!\n\n";
   helpString += ">• `/schedule list`\n";
   helpString += ">     *Shows a list of all existing reminders.*\n\n";
   helpString += ">• `/schedule delete [reminder number]`\n";
