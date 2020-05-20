@@ -34,7 +34,7 @@ export default async function (req, res) {
       break;
     case "":
     case "help":
-      res.end("help message goes here. (You said " + scheduleCommand + ").");
+      scheduleHelp(req, res, userInput);
       break;
     default:
       res.end(
@@ -100,18 +100,20 @@ async function scheduleCreate(req, res, userInput) {
   */
 }
 
+// Usage: /schedule list
 async function scheduleList(req, res, userInput) {
   try {
     // Retrieve list of reminders
     const result = await web.chat.scheduledMessages.list({
       token: process.env.SLACK_AUTH_TOKEN,
-      //channel: req.body.channel_id,
+      //channel: req.body.channel_id, // This parameter can be used to specify what channel to only retrieve reminders from
     });
 
     // Declare a string variable to write all scheduled reminders to
     var scheduledRemindersList = "*Here is the list of scheduled reminders:*\n";
 
     // Traverse list of scheduled reminders and append them to the string (scheduledRemindersList)
+    // Why is result.scheduled_messages in random order ???
     for (var i = 0; i < result.scheduled_messages.length; i++) {
       var reminderDate = new Date(result.scheduled_messages[i].post_at * 1000);
       var timeToPostAsString = reminderDate.toLocaleString();
@@ -138,6 +140,34 @@ async function scheduleList(req, res, userInput) {
   }
 }
 
-function scheduleDelete(req, res) {}
+// Usage: /schedule delete [number], where [number] can be retrieved from /schedule list
+async function scheduleDelete(req, res, userInput) {
+  console.log(userInput);
+  res.end("delete message goes here");
+}
 
-function scheduleHelp(req, res) {}
+// Usage: /schedule help (or simply just /schedule)
+async function scheduleHelp(req, res, userInput) {
+  // Declare a variable to be built upon to display the help message
+  var helpString = "";
+
+  // Build the help message
+  helpString += "*Here is the list of *`/schedule` *commands:*\n";
+  helpString +=
+    ">• `/schedule create [month] [day] [year] [hour] [minute] [am/pm] [message]`\n";
+  helpString +=
+    ">     *Creates a new reminder using the parameters given. Note that reminders cannot be set more than 120 days in advance, or be set for the past.*\n";
+  helpString +=
+    ">         *Example:* /schedule create 5 21 2020 4 50 pm <!channel> Class is starting in 10 minutes!\n\n";
+  helpString += ">• `/schedule list`\n";
+  helpString += ">     *Shows a list of all existing reminders.*\n\n";
+  helpString += ">• `/schedule delete [reminder number]`\n";
+  helpString +=
+    ">     *Deletes a reminder using the numbers from* `/schedule list`.\n";
+  helpString += ">         *Example:* /schedule delete 2\n\n";
+  helpString += ">• `/schedule help`\n";
+  helpString += ">     *Displays this list of commands.*\n";
+
+  // Display the message to the user
+  res.end(helpString);
+}
