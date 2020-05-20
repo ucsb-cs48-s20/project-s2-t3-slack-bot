@@ -27,11 +27,11 @@ SLACK_AUTH_TOKEN will be found in 'Basic Information' of  your Slack App API pag
 Go to the Slack Applications link given [here](https://api.slack.com/apps). Then, click on your app.
 Now, you should be at the "Basic Information" page. 
 ![](images/commandHelp1.png)
-From here, click on "Add features and functionality".
+<br/>From here, click on "Add features and functionality".
 ![](images/commandHelp2.png)
-Then, click on "Slash Commands".
+<br/>Then, click on "Slash Commands".
 ![](images/commandHelp3.png)
-Now, you can make the commands. To create a command, go to "Create New Command" and input
+<br/>Now, you can make the commands. To create a command, go to "Create New Command" and input
 the the following:
 
 | Command       | Request URL (Example URLs)          | Short Description            | Usage Hint                |
@@ -43,5 +43,6 @@ the the following:
 | /schedule     | cgaucho.herokuapp.com/api/schedule  | Sends messages at given time | [Create/Delete/List/Help] |
 
 The short description and usage hint doesn't impact how the command works, so feel free to skip that step.
+
 
 # Add the following Bot Token Scopes in your Slack application
