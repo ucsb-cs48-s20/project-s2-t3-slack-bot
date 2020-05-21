@@ -4,26 +4,52 @@
 
 # Set up a MongoDB server
 
+
 # Create a Slack application
 
-https://api.slack.com/apps
+Go to [https://api.slack.com/apps](https://api.slack.com/apps) and log into your Slack account if you are not already logged in. If you get redirected to your workspace after logging in, go back to [https://api.slack.com/apps](https://api.slack.com/apps).
 
-# Insert all necessary information into the .env file
+Click on “Create an App”, or if you already have some apps created, click on “Create New App” at the top-right of the page. In the pop-up box, enter a name for your bot in “App Name” and select the workspace that you would like to deploy the bot to. Click “Create App” afterwards. You should now be redirected to your app’s “Basic Information” page.
 
-After following [this tutorial](https://github.com/ucsb-cs48-s20/project-s2-t3-slack-bot/blob/master/docs/auth0-localhost.md#create-the-env-file), which explains how to set up the .env file, you will insert the following extra values.
+# Insert environment variables into the .env file and on Heroku
 
-| Key                        | Sample Value (these are just fake examples) |
-| -------------------------- | ------------------------------------------- |
-| `SLACK_CLIENT_ID`          | 123                                         |
-| `SLACK_CLIENT_SECRET`      | 123                                         |
-| `SLACK_VERIFICATION_TOKEN` | 123                                         |
-| `SLACK_AUTH_TOKEN`         | 123                                         |
-| `MONGODB_URI`              | 123                                         |
+We will now make a `.env` file. Make a copy of our `.env.SAMPLE` file by running `cp .env.SAMPLE .env`. Make sure your copied file is named `.env` (without the `.SAMPLE`). Your `.env` file should look like this now:
 
-SLACK_CLIENT_ID, SLACK_CLIENT_SECRET, SLACK_VERIFICATION_TOKEN will be found in the
-SLACK_AUTH_TOKEN will be found in 'Basic Information' of your Slack App API page
+```
+# Fill in the below values by following the instructions in docs/DEPLOY.md
+SLACK_CLIENT_ID=
+SLACK_CLIENT_SECRET=
+SLACK_VERIFICATION_TOKEN=
+SLACK_AUTH_TOKEN=
+MONGODB_URI=
+```
 
-# Set up the config vars into Heroku
+Go back to your Slack app’s “Basic Information” page and scroll down to the “App Credentials” section. There, you will find values for Client ID, Client Secret, and Verification Token. Copy and paste these values into your `.env` file in the variables `SLACK_CLIENT_ID`, `SLACK_CLIENT_SECRET`, and `SLACK_VERIFICATION_TOKEN` respectively. Make sure that there are no spaces between the `=`'s and the values that you pasted.
+
+Next, scroll back up and in the left column of the page, go to the "OAuth & Permissions" page. You should now see the “Bot User OAuth Access Token”. Copy this value into the `SLACK_AUTH_TOKEN` variable, again making sure that there is no space after the `=`.
+
+For the `MONGODB_URI` variable, please follow this guide: [https://ucsb-cs48.github.io/topics/mongodb_cloud_atlas_setup/](https://ucsb-cs48.github.io/topics/mongodb_cloud_atlas_setup/).
+
+Your `.env` file should now look something like this (these values are fake example values).
+```
+# Fill in the below values by following the instructions in docs/DEPLOY.md
+SLACK_CLIENT_ID=109232264164.1098345726706
+SLACK_CLIENT_SECRET=a7491bc91738d97138b72fd6cb
+SLACK_VERIFICATION_TOKEN=VisWjg92ksmOksoAi3kf38
+SLACK_AUTH_TOKEN=xoxb-1093412282664-108265773406-j47ayaya12k25SMOrcLso4ai3
+MONGODB_URI=mongodb+srv://adminuser:dQw4w9WgXcQ@your-bot-name-7dfa.mongodb.net/test?retryWrites=true&w=majority
+```
+
+Finally, we can now set your Heroku config variables. Go to your Heroku page, and in Settings under Config Vars, paste the variable name and variable values from your `.env` file. 
+
+In addition to the variables from your `.env` file, you should also add the following two config variables to Heroku, which will not be necessary to add into your `.env` file:
+| Variable Name        | Variable Value                                             | Description            
+| -------------------- | ---------------------------------------------------------- | ----------------------------|
+| `SLACK_REDIRECT_URI` | `https://your-heroku-app-name.herokuapp.com/api/authorize` | `your-heroku-app-name` is your Heroku app name.            |
+| `TZ`                 | `America/Los_Angeles`                                      | This variable is a Heroku-specific variable that controls time zones.         |
+
+Your config variables should now look like this:
+![Image of example config variables](images/heroku-config-vars-example.png)
 
 # Insert the following commands into your app
 
