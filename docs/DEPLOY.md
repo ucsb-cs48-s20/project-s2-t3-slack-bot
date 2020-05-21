@@ -7,7 +7,9 @@
 
 # Create a Slack application
 
-Go to [https://api.slack.com/apps](https://api.slack.com/apps) and log into your Slack account if you are not already logged in. If you get redirected to your workspace after logging in, go back to [https://api.slack.com/apps](https://api.slack.com/apps). Click on “Create an App”, or if you already have some apps created, click on “Create New App” at the top-right of the page. In the pop-up box, enter a name for your bot in “App Name” and select the workspace that you would like to deploy the bot to. Click “Create App” afterwards. You should now be redirected to your app’s “Basic Information” page.
+Go to [https://api.slack.com/apps](https://api.slack.com/apps) and log into your Slack account if you are not already logged in. If you get redirected to your workspace after logging in, go back to [https://api.slack.com/apps](https://api.slack.com/apps).
+
+Click on “Create an App”, or if you already have some apps created, click on “Create New App” at the top-right of the page. In the pop-up box, enter a name for your bot in “App Name” and select the workspace that you would like to deploy the bot to. Click “Create App” afterwards. You should now be redirected to your app’s “Basic Information” page.
 
 # Insert environment variables into the .env file and on Heroku
 
