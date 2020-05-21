@@ -11,7 +11,7 @@ Go to [https://api.slack.com/apps](https://api.slack.com/apps) and log into your
 
 Click on “Create an App”, or if you already have some apps created, click on “Create New App” at the top-right of the page. In the pop-up box, enter a name for your bot in “App Name” and select the workspace that you would like to deploy the bot to. Click “Create App” afterwards. You should now be redirected to your app’s “Basic Information” page.
 
-# Insert environment variables into the .env file and on Heroku
+# Enter environment variables into the `.env` file
 
 We will now make a `.env` file. Make a copy of our `.env.SAMPLE` file by running `cp .env.SAMPLE .env`. Make sure your copied file is named `.env` (without the `.SAMPLE`). Your `.env` file should look like this now:
 
@@ -40,7 +40,9 @@ SLACK_AUTH_TOKEN=xoxb-1093412282664-108265773406-j47ayaya12k25SMOrcLso4ai3
 MONGODB_URI=mongodb+srv://adminuser:dQw4w9WgXcQ@your-bot-name-7dfa.mongodb.net/test?retryWrites=true&w=majority
 ```
 
-Finally, we can now set your Heroku config variables. Go to your Heroku page, and in Settings under Config Vars, paste the variable name and variable values from your `.env` file. 
+# Enter environment variables into Heroku
+
+We can now set your Heroku config variables. Go to your Heroku page, and in Settings under Config Vars, paste the variable name and variable values from your `.env` file. 
 
 In addition to the variables from your `.env` file, you should also add the following two config variables to Heroku, which will not be necessary to add into your `.env` file:
 | Variable Name        | Variable Value                                             | Description            
