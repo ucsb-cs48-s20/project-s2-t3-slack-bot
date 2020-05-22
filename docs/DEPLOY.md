@@ -1,13 +1,11 @@
 # Fork our Github repository
 Create a new repository on Github. Make sure not to check `initialize the repository with a README`.
 
-Make a local copy of your blank repo by using the git command "git clone repo_link"
 
-Add a new remote “upstream” pointing at the original repo so that if there are any changes in the original repo, you can have access to it in the future. To do so:  
+Make a clone of the repository that you just created. 
 
-•	Navigate the directory you just created  
-•	After that, type this in your terminal:  
-git remote add upstream original-repo-link
+Now naviagate to the directory you just created and add a new remote “upstream” pointing at the original repo. The purpose of adding new remote is to have access to any changes (without affecting our repo) that is made in the future. The command to add this remote is: 
+`git remote add upstream slackbot-repo-link`
 
 Now pull all the files from original repo to the fork-repo that we just created.  git pull upstream master
 
