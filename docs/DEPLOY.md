@@ -13,7 +13,7 @@
 1) Go to https://id.heroku.com/login and set up an online Heroku account.
 2) After you've successfully created an account, you should be able to find `Create new app` button in the homepage. Click it and make a new app in heroku with the name as you wish. <br/>![](images/github_4.PNG)
 3) Go to the Deploy screen of the Heroku Dashboard and connect your GitHub repo to the Heroku App. <br/>![](images/github_5.PNG)
-4) Before you make your first deployment of our app, you will need to set up some variables in heroku which is disccused below. 
+4) Before you make your first deployment of our app, you will need to set up some variables in Heroku which is disccused later below. 
 
 
 # Set up a MongoDB server
