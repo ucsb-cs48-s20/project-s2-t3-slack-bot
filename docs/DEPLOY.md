@@ -1,6 +1,6 @@
 # Fork our Github repository
 Create a new repository on Github. Make sure not to check `initialize the repository with a README`.
-<br/>![](images/github_1.png)
+<br/>![](images/github_1.PNG)
 
 
 Make a clone of the repository that you just created. 
