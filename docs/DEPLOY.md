@@ -9,10 +9,8 @@
           `git remote add upstream slackbot-repo-link`
           <br/>![](images/github_2.PNG)
 
-Now pull all the files from original repo to the fork-repo that we just created.  git pull upstream master
-
-Finally, push all the changes to your new repo’s master.
-git push origin master
+4) Now pull all the files from original repo to the fork-repo that we just created and push all the changes to your new repository.
+   <br/>![](images/github_3.PNG)
 
 
 # Set up a Heroku app
