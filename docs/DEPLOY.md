@@ -1,4 +1,5 @@
 # Fork our Github repository
+
 1) Create a new repository on Github. Make sure not to check `initialize the repository with a README`.
 <br/>![](images/github_1.PNG)
 2) Make a clone of the repository that you just created. 
@@ -10,6 +11,7 @@
 
 
 # Set up a Heroku app
+
 1) Go to https://id.heroku.com/login and set up an online Heroku account.
 2) After you've successfully created an account, you should be able to find `Create new app` button in the homepage. Click it and make a new app in heroku with the name as you wish. <br/>![](images/github_4.PNG)
 3) Go to the Deploy screen of the Heroku Dashboard and connect your GitHub repo to the Heroku App. <br/>![](images/github_5.PNG)
@@ -17,6 +19,9 @@
 
 
 # Set up a MongoDB server
+
+To set up MongoDB database on your side, follow these instructions: [https://ucsb-cs48.github.io/topics/mongodb_cloud_atlas_setup/]
+You should be obtaining MONGODB_URI value that you will be using in a later step.
 
 
 # Create a Slack application
