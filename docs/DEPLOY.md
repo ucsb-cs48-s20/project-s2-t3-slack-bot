@@ -5,6 +5,7 @@ Create a new repository on Github. Make sure not to check `initialize the reposi
 Make a clone of the repository that you just created. 
 
 Now naviagate to the directory you just created and add a new remote “upstream” pointing at the original repo. The purpose of adding new remote is to have access to any changes (without affecting our repo) that is made in the future. The command to add this remote is: 
+
 `git remote add upstream slackbot-repo-link`
 
 Now pull all the files from original repo to the fork-repo that we just created.  git pull upstream master
