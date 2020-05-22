@@ -1,22 +1,18 @@
 # Fork our Github repository
 1) Create a new repository on Github. Make sure not to check `initialize the repository with a README`.
 <br/>![](images/github_1.PNG)
-
-
 2) Make a clone of the repository that you just created. 
-
 3) Now naviagate to the directory you just cloned and add a new remote “upstream” pointing at the original repo. The purpose of adding new remote is to have access to any changes (without affecting our repo) that is made in the future. The command to add this remote is: 
           `git remote add upstream slackbot-repo-link`
           <br/>![](images/github_2.PNG)
-
 4) Now pull all the files from original repo to the fork-repo that we just created and push all the changes to your new repository.
    <br/>![](images/github_3.PNG)
 
 
 # Set up a Heroku app
 1) Go to https://id.heroku.com/login and set up an online Heroku account.
-2) After you've sucessfully created an account, you should be able to find `Create new app` button in the homepage. Click it and make a new app in heroku with the name as you wish. <br/>![](images/github_4.PNG)
-
+2) After you've successfully created an account, you should be able to find `Create new app` button in the homepage. Click it and make a new app in heroku with the name as you wish. <br/>![](images/github_4.PNG)
+3) 
 # Set up a MongoDB server
 
 
