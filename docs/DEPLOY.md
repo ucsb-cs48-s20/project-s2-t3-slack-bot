@@ -1,4 +1,18 @@
 # Fork our Github repository
+Create a new repository on Github. Make sure not to check `initialize the repository with a README`.
+
+Make a local copy of your blank repo by using the git command "git clone repo_link"
+
+Add a new remote “upstream” pointing at the original repo so that if there are any changes in the original repo, you can have access to it in the future. To do so: 
+•	Navigate the directory you just created 
+•	After that, type this in your terminal:
+git remote add upstream original-repo-link
+
+Now pull all the files from original repo to the fork-repo that we just created.  git pull upstream master
+
+Finally, push all the changes to your new repo’s master.
+git push origin master
+
 
 # Set up a Heroku app
 
