@@ -14,6 +14,8 @@
 
 
 # Set up a Heroku app
+1) Go to https://id.heroku.com/login and set up an online Heroku account.
+2) 
 
 # Set up a MongoDB server
 
