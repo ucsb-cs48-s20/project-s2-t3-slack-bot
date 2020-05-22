@@ -20,7 +20,7 @@
 
 # Set up a MongoDB server
 
-To set up MongoDB database on your side, please follow this guide: [https://ucsb-cs48.github.io/topics/mongodb_cloud_atlas_setup/](https://ucsb-cs48.github.io/topics/mongodb_cloud_atlas_setup/).
+To set up MongoDB database on your side, please follow this guide: [https://ucsb-cs48.github.io/topics/mongodb_cloud_atlas_setup/](https://ucsb-cs48.github.io/topics/mongodb_cloud_atlas_setup/).  
 You should be obtaining MONGODB_URI value that you will be using in a later step.
 
 
