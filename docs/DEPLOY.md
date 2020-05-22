@@ -1,6 +1,6 @@
 # Fork our Github repository
 Create a new repository on Github. Make sure not to check `initialize the repository with a README`.
-https://github.com/ucsb-cs48-s20/project-s2-t3-slack-bot/blob/master/docs/images/github_1.PNG
+<br/>![](images/github_1.png)
 
 
 Make a clone of the repository that you just created. 
