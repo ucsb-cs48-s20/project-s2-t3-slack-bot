@@ -1,13 +1,14 @@
 # Fork our Github repository
-Create a new repository on Github. Make sure not to check `initialize the repository with a README`.
+1) Create a new repository on Github. Make sure not to check `initialize the repository with a README`.
 <br/>![](images/github_1.PNG)
 
 
-Make a clone of the repository that you just created. 
+2) Make a clone of the repository that you just created. 
 
-Now naviagate to the directory you just created and add a new remote “upstream” pointing at the original repo. The purpose of adding new remote is to have access to any changes (without affecting our repo) that is made in the future. The command to add this remote is: 
+3) Now naviagate to the directory you just cloned and add a new remote “upstream” pointing at the original repo. The purpose of adding new remote is to have access to any changes (without affecting our repo) that is made in the future. The command to add this remote is: 
 
 `git remote add upstream slackbot-repo-link`
+<br/>![](images/github_1.PNG)
 
 Now pull all the files from original repo to the fork-repo that we just created.  git pull upstream master
 
