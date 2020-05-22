@@ -7,8 +7,8 @@
 
 3) Now naviagate to the directory you just cloned and add a new remote “upstream” pointing at the original repo. The purpose of adding new remote is to have access to any changes (without affecting our repo) that is made in the future. The command to add this remote is: 
 
-`git remote add upstream slackbot-repo-link`
-<br/>![](images/github_2.PNG)
+  `git remote add upstream slackbot-repo-link`
+  <br/>![](images/github_2.PNG)
 
 Now pull all the files from original repo to the fork-repo that we just created.  git pull upstream master
 
