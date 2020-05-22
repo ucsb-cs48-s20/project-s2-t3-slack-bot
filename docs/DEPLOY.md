@@ -15,7 +15,7 @@
 
 # Set up a Heroku app
 1) Go to https://id.heroku.com/login and set up an online Heroku account.
-2) 
+2) After you've sucessfully created an account, you should be able to find `Create new app` button in the homepage. Click it and make a new app in heroku with the name as you wish. <br/>![](images/github_4.PNG)
 
 # Set up a MongoDB server
 
