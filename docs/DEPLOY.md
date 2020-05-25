@@ -1,6 +1,6 @@
 # Fork our Github repository
 
-Create a fork of our repo by clicking on "Fork" at the top-right of our repo's page: https://github.com/ucsb-cs48-s20/project-s2-t3-slack-bot.
+Create a fork of our repo by clicking on "Fork" at the top-right of our repo's page: https://github.com/ucsb-cs48-s20/project-s2-t3-slack-bot. Make a local clone of the forked repo using `git clone`.
 
 # Set up a Heroku app
 
@@ -36,7 +36,7 @@ By the end of step 10 in the above guide, you will obtain a value for `MONGODB_U
 
 # Enter environment variables into the `.env` file
 
-We will now make a `.env` file. Make a copy of our `.env.SAMPLE` file by running `cp .env.SAMPLE .env`. Make sure your copied file is named `.env` (without the `.SAMPLE`). Your `.env` file should look like this now:
+We will now make the `.env` file. Locally on your computer, make a copy of our `.env.SAMPLE` file by running `cp .env.SAMPLE .env`. Make sure your copied file is named `.env` (without the `.SAMPLE`). Your `.env` file should look like this now:
 
 ```
 # Fill in the below values by following the instructions in docs/DEPLOY.md
