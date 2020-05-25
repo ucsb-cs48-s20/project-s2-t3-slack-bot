@@ -9,9 +9,11 @@ Create a fork of our repo by clicking on "Fork" at the top-right of our repo's p
 3) Go to the Deploy screen of the Heroku Dashboard and connect your forked GitHub repo to the Heroku App. <br/>![](images/github_5.PNG)
 4) Before you make your first deployment of your app, you will need to set up config variables in Heroku which will be explained in a later step.
 
-# Create a Slack application
+# Create a Slack workspace + application
 
-Go to [https://api.slack.com/apps](https://api.slack.com/apps) and log into your Slack account if you are not already logged in. If you get redirected to your workspace after logging in, go back to [https://api.slack.com/apps](https://api.slack.com/apps).
+If you do not have a Slack workspace to deploy your bot to, follow the instructions here to create a new workspace: https://slack.com/help/articles/206845317-Create-a-Slack-workspace.
+
+Next, go to [https://api.slack.com/apps](https://api.slack.com/apps) and log into your Slack account if you are not already logged in. If you get redirected to your workspace after logging in, go back to [https://api.slack.com/apps](https://api.slack.com/apps).
 
 Click on “Create an App”, or if you already have some apps created, click on “Create New App” at the top-right of the page. In the pop-up box, enter a name for your bot in “App Name” and select the workspace that you would like to deploy the bot to. Click “Create App” afterwards. You should now be redirected to your app’s “Basic Information” page.
 
