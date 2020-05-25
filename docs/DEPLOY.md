@@ -98,7 +98,7 @@ the following five commands, making sure to change `cgaucho` in the request URLs
 | --------- | -------------------------------------------- | ---------------------------- | ------------------------- |
 | /appraise | `https://cgaucho.herokuapp.com/api/appraise` | Shows reputation             | [User]                    |
 | /hello    | `https://cgaucho.herokuapp.com/api/hello`    | Messages hello back          |                           |
-| /praise   | `https://cgaucho.herokuapp.com/api/praise`   | Gives people 1 rep           | [User]                    |
+| /praise   | `https://cgaucho.herokuapp.com/api/praise`   | Gives a person 1 reputation  | [User]                    |
 | /rankings | `https://cgaucho.herokuapp.com/api/rankings` | Shows most reputable         |                           |
 | /schedule | `https://cgaucho.herokuapp.com/api/schedule` | Sends messages at given time | [Create/Delete/List/Help] |
 
@@ -107,3 +107,5 @@ The short description and usage hint doesn't impact how the command works, so fe
 # You are now finished deploying our Slack bot!
 
 In your Slack workspace, you can now type "/" to see a list of all commands. Among the list, you should see the commands pertaining to your bot. Also, on your Heroku website, there is also a button that allows others to deploy your bot onto their workspaces.
+
+Something to note is that after you type a command from this bot, you could possibly get an error from **Slackbot** (not the bot that you just deployed). This could either mean that Heroku is "just waking up", or that there is a bug in our code. (hopefully it is just the former!) Here is what an error message from Slackbot looks like: ![](images/slackbot-error.png)
