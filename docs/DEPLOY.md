@@ -1,21 +1,13 @@
 # Fork our Github repository
 
-1) Create a new repository on Github. Make sure to not check `Initialize the repository with a README`.
-<br/>![](images/github_1.PNG)
-2) Make a clone of the repository that you just created. 
-3) Now navigate to the directory you just cloned and add a new remote “upstream” pointing at the original repo. The purpose of adding new remote is to have access to any changes (without affecting our repo) that is made in the future. The command to add this remote is: 
-          `git remote add upstream slackbot-repo-link`
-          <br/>![](images/github_2.PNG)
-4) Now pull all the files from original repo to the fork-repo that we just created and push all the changes to your new repository.
-   <br/>![](images/github_3.PNG)
-
+Create a fork of our repo by clicking on "Fork" at the top-right of our repo's page: https://github.com/ucsb-cs48-s20/project-s2-t3-slack-bot.
 
 # Set up a Heroku app
 
-1) Go to https://id.heroku.com/login and set up an online Heroku account.
-2) After you've successfully created an account, you should be able to find `Create new app` button in the homepage. Click it and make a new app in heroku with the name as you wish. <br/>![](images/github_4.PNG)
-3) Go to the Deploy screen of the Heroku Dashboard and connect your GitHub repo to the Heroku App. <br/>![](images/github_5.PNG)
-4) Before you make your first deployment of our app, you will need to set up some variables in Heroku which will be explained in a later step. 
+1) Go to https://dashboard.heroku.com/apps. If you are not already logged in, please log in.
+2) At the top-right of the page, click on "New" and in the dropdown menu, click "Create new app." Enter a name for your Heroku app and click "Create App." <br/>![](images/github_4.PNG)
+3) Go to the Deploy screen of the Heroku Dashboard and connect your forked GitHub repo to the Heroku App. <br/>![](images/github_5.PNG)
+4) Before you make your first deployment of your app, you will need to set up config variables in Heroku which will be explained in a later step.
 
 # Create a Slack application
 
@@ -86,8 +78,8 @@ Your config variables should now look like this:
 
 # Insert the following commands into your app
 
-Go to the Slack Applications link given [here](https://api.slack.com/apps). Then, click on your app.
-Now, you should be at the "Basic Information" page.
+Go back to the Slack Applications link given [here](https://api.slack.com/apps). Then, click on your app.
+Now, you should be back at the "Basic Information" page.
 ![](images/commandHelp1.png)
 <br/>From here, click on "Add features and functionality".
 ![](images/commandHelp2.png)
@@ -105,3 +97,5 @@ the the following:
 | /schedule | https://cgaucho.herokuapp.com/api/schedule | Sends messages at given time | [Create/Delete/List/Help] |
 
 The short description and usage hint doesn't impact how the command works, so feel free to skip that step.
+
+You are now finished deploying our Slack bot!
