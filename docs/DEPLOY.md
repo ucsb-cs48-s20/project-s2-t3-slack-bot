@@ -1,9 +1,9 @@
 # Fork our Github repository
 
-1) Create a new repository on Github. Make sure not to check `initialize the repository with a README`.
+1) Create a new repository on Github. Make sure to not check `Initialize the repository with a README`.
 <br/>![](images/github_1.PNG)
 2) Make a clone of the repository that you just created. 
-3) Now naviagate to the directory you just cloned and add a new remote “upstream” pointing at the original repo. The purpose of adding new remote is to have access to any changes (without affecting our repo) that is made in the future. The command to add this remote is: 
+3) Now navigate to the directory you just cloned and add a new remote “upstream” pointing at the original repo. The purpose of adding new remote is to have access to any changes (without affecting our repo) that is made in the future. The command to add this remote is: 
           `git remote add upstream slackbot-repo-link`
           <br/>![](images/github_2.PNG)
 4) Now pull all the files from original repo to the fork-repo that we just created and push all the changes to your new repository.
@@ -15,7 +15,7 @@
 1) Go to https://id.heroku.com/login and set up an online Heroku account.
 2) After you've successfully created an account, you should be able to find `Create new app` button in the homepage. Click it and make a new app in heroku with the name as you wish. <br/>![](images/github_4.PNG)
 3) Go to the Deploy screen of the Heroku Dashboard and connect your GitHub repo to the Heroku App. <br/>![](images/github_5.PNG)
-4) Before you make your first deployment of our app, you will need to set up some variables in Heroku which is disccused later below. 
+4) Before you make your first deployment of our app, you will need to set up some variables in Heroku which will be explained in a later step. 
 
 # Create a Slack application
 
@@ -28,7 +28,7 @@ Click on “Create an App”, or if you already have some apps created, click on
 Now go to the "OAuth & Permissions" tab located here.
 <br/>![](images/scopeHelp1.png)
 
-<br/>Under "Redirect URLs," click on "Add New Redirect URL" and enter your redirect URL. It should be of the form `https://cgaucho.herokuapp.com/api/authorize`, with `cgaucho` swapped out for your Heroku app's name. Note that you will only need one redirect URL, unlike the following image.
+<br/>Under "Redirect URLs," click on "Add New Redirect URL". Enter your redirect URL, which is a URL of the form `https://cgaucho.herokuapp.com/api/authorize`, with `cgaucho` swapped out for your Heroku app's name. Note that you will only need one redirect URL, unlike the following image.
 <br/>![](images/scopeHelp3.png)
 
 <br/> Then, scroll down until you get to the box named "Scopes". Click on "Add an OAuth Scope" and add the four scopes in the following image:
@@ -40,7 +40,7 @@ To set up your MongoDB database, please follow this guide:
 
 [https://ucsb-cs48.github.io/topics/mongodb_cloud_atlas_setup/](https://ucsb-cs48.github.io/topics/mongodb_cloud_atlas_setup/).
 
-By the end of step 10 in that guide, you will obtain a value for `MONGODB_URI`. You will need this value for the next step.
+By the end of step 10 in the above guide, you will obtain a value for `MONGODB_URI`. You will need this value for the next step.
 
 # Enter environment variables into the `.env` file
 
