@@ -9,7 +9,7 @@ Create a fork of our repo by clicking on "Fork" at the top-right of our repo's p
 3) Go to the Deploy screen of the Heroku Dashboard and connect your forked GitHub repo to the Heroku App. <br/>![](images/github_5.PNG)
 4) Before you make your first deployment of your app, you will need to set up config variables in Heroku which will be explained in a later step.
 
-# Create a Slack workspace + application
+# Create a Slack workspace and Slack application
 
 If you do not have a Slack workspace to deploy your bot to, follow the instructions here to create a new workspace: https://slack.com/help/articles/206845317-Create-a-Slack-workspace.
 
@@ -65,7 +65,7 @@ SLACK_AUTH_TOKEN=xoxb-1093412282664-108265773406-j47ayaya12k25SMOrcLso4ai3
 MONGODB_URI=mongodb+srv://adminuser:dQw4w9WgXcQ@your-bot-name-7dfa.mongodb.net/test?retryWrites=true&w=majority
 ```
 
-# Enter environment variables into Heroku
+# Enter environment variables into Heroku and deploy
 
 We can now set your Heroku config variables. Go to your Heroku page, and in Settings under Config Vars, paste the variable name and variable values from your `.env` file. However, there is one change you will need to make. In Heroku, instead of entering `MONGODB_URI` as a variable name, you must rename it to `MONGODB_URI_PRODUCTION` instead.
 
@@ -77,6 +77,8 @@ In addition to the variables from your `.env` file, you should also add the foll
 
 Your config variables should now look like this:
 ![Image of example config variables](images/heroku-config-vars-example.png)
+
+After setting up your config variables, go to the Deploy tab on Heroku and deploy your master branch.
 
 # Insert the following commands into your app
 
@@ -100,4 +102,6 @@ the the following:
 
 The short description and usage hint doesn't impact how the command works, so feel free to skip that step.
 
-You are now finished deploying our Slack bot!
+# You are now finished deploying our Slack bot!
+
+In your Slack workspace, you can now type "/" to see a list of all commands. Among the list, you should see the commands pertaining to your bot.
