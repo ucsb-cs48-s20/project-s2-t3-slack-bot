@@ -17,18 +17,30 @@
 3) Go to the Deploy screen of the Heroku Dashboard and connect your GitHub repo to the Heroku App. <br/>![](images/github_5.PNG)
 4) Before you make your first deployment of our app, you will need to set up some variables in Heroku which is disccused later below. 
 
-
-# Set up a MongoDB server
-
-To set up MongoDB database on your side, please follow this guide: [https://ucsb-cs48.github.io/topics/mongodb_cloud_atlas_setup/](https://ucsb-cs48.github.io/topics/mongodb_cloud_atlas_setup/).  
-You should be obtaining MONGODB_URI value that you will be using in a later step.
-
-
 # Create a Slack application
 
 Go to [https://api.slack.com/apps](https://api.slack.com/apps) and log into your Slack account if you are not already logged in. If you get redirected to your workspace after logging in, go back to [https://api.slack.com/apps](https://api.slack.com/apps).
 
 Click on “Create an App”, or if you already have some apps created, click on “Create New App” at the top-right of the page. In the pop-up box, enter a name for your bot in “App Name” and select the workspace that you would like to deploy the bot to. Click “Create App” afterwards. You should now be redirected to your app’s “Basic Information” page.
+
+# Add Redirect URLs and Bot Token Scopes in your Slack application
+
+Now go to the "OAuth & Permissions" tab located here.
+<br/>![](images/scopeHelp1.png)
+
+<br/>Under "Redirect URLs," click on "Add New Redirect URL" and enter your redirect URL. It should be of the form `https://cgaucho.herokuapp.com/api/authorize`, with `cgaucho` swapped out for your Heroku app's name. Note that you will only need one redirect URL, unlike the following image.
+<br/>![](images/scopeHelp3.png)
+
+<br/> Then, scroll down until you get to the box named "Scopes". Click on "Add an OAuth Scope" and add the four scopes in the following image:
+<br/>![](images/scopeHelp2.png)
+
+# Set up a MongoDB database
+
+To set up your MongoDB database, please follow this guide:
+
+[https://ucsb-cs48.github.io/topics/mongodb_cloud_atlas_setup/](https://ucsb-cs48.github.io/topics/mongodb_cloud_atlas_setup/).
+
+By the end of step 10 in that guide, you will obtain a value for `MONGODB_URI`. You will need this value for the next step.
 
 # Enter environment variables into the `.env` file
 
@@ -47,7 +59,7 @@ Go back to your Slack app’s “Basic Information” page and scroll down to th
 
 Next, scroll back up and in the left column of the page, go to the "OAuth & Permissions" page. You should now see the “Bot User OAuth Access Token”. Copy this value into the `SLACK_AUTH_TOKEN` variable, again making sure that there is no space after the `=`.
 
-For the `MONGODB_URI` variable, please follow this guide: [https://ucsb-cs48.github.io/topics/mongodb_cloud_atlas_setup/](https://ucsb-cs48.github.io/topics/mongodb_cloud_atlas_setup/).
+For the `MONGODB_URI` variable, paste in the value you created in the previous step.
 
 Your `.env` file should now look something like this (these values are fake example values).
 ```
@@ -61,7 +73,7 @@ MONGODB_URI=mongodb+srv://adminuser:dQw4w9WgXcQ@your-bot-name-7dfa.mongodb.net/t
 
 # Enter environment variables into Heroku
 
-We can now set your Heroku config variables. Go to your Heroku page, and in Settings under Config Vars, paste the variable name and variable values from your `.env` file. 
+We can now set your Heroku config variables. Go to your Heroku page, and in Settings under Config Vars, paste the variable name and variable values from your `.env` file. However, there is one change you will need to make. In Heroku, instead of entering `MONGODB_URI` as a variable name, you must rename it to `MONGODB_URI_PRODUCTION` instead.
 
 In addition to the variables from your `.env` file, you should also add the following two config variables to Heroku, which will not be necessary to add into your `.env` file:
 | Variable Name        | Variable Value                                             | Description            
@@ -93,14 +105,3 @@ the the following:
 | /schedule | https://cgaucho.herokuapp.com/api/schedule | Sends messages at given time | [Create/Delete/List/Help] |
 
 The short description and usage hint doesn't impact how the command works, so feel free to skip that step.
-
-# Add the following Redirect URLs and Bot Token Scopes in your Slack application
-
-Return to the home page. Now, go to the "OAuth & Permissions" tab.
-<br/>![](images/scopeHelp1.png)
-
-<br/>Click on "Add New Redirect URL" and your redirect URL. An example of what the website should look like is cgaucho.herokuapp.com/api/authorize
-<br/>![](images/scopeHelp3.png)
-
-<br/> Then, scroll down until you get to the box named "Scopes". Click on OAuth Scopes and add the scopes in the following image:
-<br/>![](images/scopeHelp2.png)
