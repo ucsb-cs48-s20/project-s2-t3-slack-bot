@@ -3,7 +3,7 @@ const request = require("request");
 import { initDatabase } from "../../utils/mongodb";
 
 export default async function (req, res) {
-  let userName = req.body.text;
+  let userName = req.body.text.slice(1);
   if (!userName || userName.trim() === "") {
     res.end("Please tag the person you want to view :)");
   } else {
