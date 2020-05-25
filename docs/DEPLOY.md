@@ -17,16 +17,18 @@ Next, go to [https://api.slack.com/apps](https://api.slack.com/apps) and log int
 
 Click on “Create an App”, or if you already have some apps created, click on “Create New App” at the top-right of the page. In the pop-up box, enter a name for your bot in “App Name” and select the workspace that you would like to deploy the bot to. Click “Create App” afterwards. You should now be redirected to your app’s “Basic Information” page.
 
-# Add Redirect URLs and Bot Token Scopes in your Slack application
+# Install app to workspace and add Redirect URLs and Bot Token Scopes
 
 Now go to the "OAuth & Permissions" tab located here.
 <br/>![](images/scopeHelp1.png)
 
-<br/>Under "Redirect URLs," click on "Add New Redirect URL". Enter your redirect URL, which is a URL of the form `https://cgaucho.herokuapp.com/api/authorize`, with `cgaucho` swapped out for your Heroku app's name. Note that you will only need one redirect URL, unlike the following image.
+<br/>Under "Redirect URLs," click on "Add New Redirect URL". Enter your redirect URL, which is a URL of the form `https://cgaucho.herokuapp.com/api/authorize`, with `cgaucho` swapped out for your Heroku app's name. Note that you will only need one redirect URL, unlike the following image. Afterwards, click on "Save URLs."
 <br/>![](images/scopeHelp3.png)
 
-<br/> Then, scroll down until you get to the box named "Scopes". Click on "Add an OAuth Scope" and add the four scopes in the following image:
+<br/> Then, scroll down until you get to the box named "Scopes". Under "Bot Token Scopes," click on "Add an OAuth Scope" and add the four scopes in the following image:
 <br/>![](images/scopeHelp2.png)
+
+Finally, scroll to the top of the page and click on the "Install App to Workspace" button. Select a channel for the bot to post in, and click "Allow."
 
 # Set up a MongoDB database
 
@@ -34,7 +36,7 @@ To set up your MongoDB database, please follow this guide:
 
 [https://ucsb-cs48.github.io/topics/mongodb_cloud_atlas_setup/](https://ucsb-cs48.github.io/topics/mongodb_cloud_atlas_setup/).
 
-By the end of step 10 in the above guide, you will obtain a value for `MONGODB_URI`. You will need this value for the next step.
+Follow the guide up until the end of step 10. One thing to note is that, by the end of step 9, the guide asks you to paste in a string into your app's configuration. Instead of that, temporarily paste it somewhere else (that is safe!). You will need this string for the next step.
 
 # Enter environment variables into the `.env` file
 
@@ -51,9 +53,9 @@ MONGODB_URI=
 
 Go back to your Slack app’s “Basic Information” page and scroll down to the “App Credentials” section. There, you will find values for Client ID, Client Secret, and Verification Token. Copy and paste these values into your `.env` file in the variables `SLACK_CLIENT_ID`, `SLACK_CLIENT_SECRET`, and `SLACK_VERIFICATION_TOKEN` respectively. Make sure that there are no spaces between the `=`'s and the values that you pasted.
 
-Next, scroll back up and in the left column of the page, go to the "OAuth & Permissions" page. You should now see the “Bot User OAuth Access Token”. Copy this value into the `SLACK_AUTH_TOKEN` variable, again making sure that there is no space after the `=`.
+Next, scroll back up and in the left column of the page, go to the "OAuth & Permissions" page. You should now see the “Bot User OAuth Access Token”. Copy and paste this value into the `SLACK_AUTH_TOKEN` variable of `.env`, again making sure that there is no space after the `=`.
 
-For the `MONGODB_URI` variable, paste in the value you created in the previous step.
+Finally, for the `MONGODB_URI` variable, paste in the value you created in the previous step.
 
 Your `.env` file should now look something like this (these values are fake example values).
 ```
@@ -67,7 +69,7 @@ MONGODB_URI=mongodb+srv://adminuser:dQw4w9WgXcQ@your-bot-name-7dfa.mongodb.net/t
 
 # Enter environment variables into Heroku and deploy
 
-We can now set your Heroku config variables. Go to your Heroku page, and in Settings under Config Vars, paste the variable name and variable values from your `.env` file. However, there is one change you will need to make. In Heroku, instead of entering `MONGODB_URI` as a variable name, you must rename it to `MONGODB_URI_PRODUCTION` instead.
+We can now set your Heroku config variables. Go to your Heroku app's page, and in Settings under Config Vars, paste the variable name and variable values from your `.env` file. However, there is one change you will need to make. In Heroku, instead of entering `MONGODB_URI` as a variable name, you must rename it to `MONGODB_URI_PRODUCTION` instead.
 
 In addition to the variables from your `.env` file, you should also add the following two config variables to Heroku, which will not be necessary to add into your `.env` file:
 | Variable Name        | Variable Value                                             | Description            
@@ -75,12 +77,12 @@ In addition to the variables from your `.env` file, you should also add the foll
 | `SLACK_REDIRECT_URI` | `https://your-heroku-app-name.herokuapp.com/api/authorize` | `your-heroku-app-name` is your Heroku app name.            |
 | `TZ`                 | `America/Los_Angeles`                                      | This variable is a Heroku-specific variable that controls time zones.         |
 
-Your config variables should now look like this:
+Your config variables should now look something like this:
 ![Image of example config variables](images/heroku-config-vars-example.png)
 
 After setting up your config variables, go to the Deploy tab on Heroku and deploy your master branch.
 
-# Insert the following commands into your app
+# Insert the slash commands into your Slack app
 
 Go back to the Slack Applications link given [here](https://api.slack.com/apps). Then, click on your app.
 Now, you should be back at the "Basic Information" page.
@@ -89,19 +91,19 @@ Now, you should be back at the "Basic Information" page.
 ![](images/commandHelp2.png)
 <br/>Then, click on "Slash Commands".
 ![](images/commandHelp3.png)
-<br/>Now, you can make the commands. To create a command, go to "Create New Command" and input
-the the following:
+<br/>Now, you can make the commands. To create a command, click on "Create New Command" and input
+the following five commands, making sure to change `cgaucho` in the request URLs to match your Heroku app's name.
 
-| Command   | Request URL (Example URLs)                 | Short Description            | Usage Hint                |
-| --------- | ------------------------------------------ | ---------------------------- | ------------------------- |
-| /appraise | https://cgaucho.herokuapp.com/api/appraise | Shows reputation             | [User]                    |
-| /hello    | https://cgaucho.herokuapp.com/api/hello    | Messages hello back          |                           |
-| /praise   | https://cgaucho.herokuapp.com/api/praise   | Gives people 1 rep           | [User]                    |
-| /rankings | https://cgaucho.herokuapp.com/api/rankings | Shows most reputable         |                           |
-| /schedule | https://cgaucho.herokuapp.com/api/schedule | Sends messages at given time | [Create/Delete/List/Help] |
+| Command   | Request URL (Example URLs)                   | Short Description            | Usage Hint                |
+| --------- | -------------------------------------------- | ---------------------------- | ------------------------- |
+| /appraise | `https://cgaucho.herokuapp.com/api/appraise` | Shows reputation             | [User]                    |
+| /hello    | `https://cgaucho.herokuapp.com/api/hello`    | Messages hello back          |                           |
+| /praise   | `https://cgaucho.herokuapp.com/api/praise`   | Gives people 1 rep           | [User]                    |
+| /rankings | `https://cgaucho.herokuapp.com/api/rankings` | Shows most reputable         |                           |
+| /schedule | `https://cgaucho.herokuapp.com/api/schedule` | Sends messages at given time | [Create/Delete/List/Help] |
 
 The short description and usage hint doesn't impact how the command works, so feel free to skip that step.
 
 # You are now finished deploying our Slack bot!
 
-In your Slack workspace, you can now type "/" to see a list of all commands. Among the list, you should see the commands pertaining to your bot.
+In your Slack workspace, you can now type "/" to see a list of all commands. Among the list, you should see the commands pertaining to your bot. Also, on your Heroku website, there is also a button that allows others to deploy your bot onto their workspaces.
