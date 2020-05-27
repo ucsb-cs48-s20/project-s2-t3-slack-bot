@@ -4,17 +4,17 @@
 
 ## Description:
 
-A simple bot on Stack that can call music from webistes, pull images from websites, and a
-currency system that lets user earn points for participating in discussions. The currency will be given to
-users manually by a command (/appraise) to display their contribution to the channel. The system will also include
-a command that can show the amount of points a user has (/reputation @[username]). As for the other features, they
-will be expanded on as we progress in the project.
+A simple bot on Slack that can allows you to award points to other users for their contributions in discussions!
+Reputation points can be awarded to others by using the `/praise @[username]` command. You can also type `/appraise @[username]`
+to show how much reputation a particular user has. Other features include a `/schedule` command that allows users to schedule reminders,
+as well as a `/rankings` command to show the most reputable users of the workspace.
+As for the other features, they will be expanded on as we progress in the project.
 
-There will be three user roles: Regular Users, Moderators, and Administrators.
+~~There will be three user roles: Regular Users, Moderators, and Administrators.
 The regular users will be able to get music, pull images, award other users, and view other user's reputations.
 Moderators will be able to do everything listed above plus regulatory commands (muting, banning, suspending, etc.)
 Administrators will be able to customize the roles beyond the default privileges given.
-(Administrators control everything, moderators control users, users control nothing)
+(Administrators control everything, moderators control users, users control nothing)~~
 
 Tech Stack: node.js
 
