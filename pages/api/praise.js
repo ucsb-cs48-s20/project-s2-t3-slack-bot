@@ -31,44 +31,46 @@ export default async function (req, res) {
         await usersCollection.updateOne(query2, {
           $set: { lastPraiseTime: timeStamp },
         });
-
-        //if you have not praised in last 20 seconds you are ready to either add a new user with praiseValue 1 or increment their praiseValue
-        if (query) {
-          //if user exits increment their praiseValue
-          try {
-            await usersCollection.updateOne(query, {
-              $set: { praiseValue: query.praiseValue + 1 },
-            });
-            console.log(`Successfully updated item with _id: ${query._id}`);
-            res.end(userName.slice(1) + " has been praised.");
-          } catch (err) {
-            console.error(`Failed to update item: ${err}`);
-          }
-        } else {
-          //if not create a new user you want to praise with praiseValue 1
-          const newUser2 = {
-            name: userName,
-            praiseValue: 1,
-            lastPraiseTime: 0,
-          };
-          try {
-            await usersCollection.insertOne(newUser2);
-            let query = await usersCollection.findOne({ name: userName });
-            console.log(`Successfully inserted item with _id: ${query._id}`);
-            res.end(userName.slice(1) + " has been praised.");
-          } catch (err) {
-            console.error(`Failed to insert item: ${err}`);
-          }
-        }
       }
     } else {
-      //if you are not in database let add you to mongodb database with the timeStamp which is current time
+      //if you are not in database lets add you to mongodb database with the timeStamp which is current time
       const newUser = {
         name: req.body.user_name,
         praiseValue: 0,
         lastPraiseTime: timeStamp,
+        lastApraiseTime: 0,
       };
       await usersCollection.insertOne(newUser);
+    }
+
+    //if you have not praised in last 20 seconds you are ready to either add a new user with praiseValue 1 or increment their praiseValue
+    if (query) {
+      //if user exits increment their praiseValue
+      try {
+        await usersCollection.updateOne(query, {
+          $set: { praiseValue: query.praiseValue + 1 },
+        });
+        console.log(`Successfully updated item with _id: ${query._id}`);
+        res.end(userName.slice(1) + " has been praised.");
+      } catch (err) {
+        console.error(`Failed to update item: ${err}`);
+      }
+    } else {
+      //if not create a new user you want to praise with praiseValue 1
+      const newUser2 = {
+        name: userName,
+        praiseValue: 1,
+        lastPraiseTime: 0,
+        lastApraiseTime: 0,
+      };
+      try {
+        await usersCollection.insertOne(newUser2);
+        let query = await usersCollection.findOne({ name: userName });
+        console.log(`Successfully inserted item with _id: ${query._id}`);
+        res.end(userName.slice(1) + " has been praised.");
+      } catch (err) {
+        console.error(`Failed to insert item: ${err}`);
+      }
     }
   }
 }
