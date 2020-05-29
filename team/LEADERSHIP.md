@@ -13,10 +13,12 @@
 | Thu 04/30 | Adarsha Poudel | Led standup and discussion for private/public          |
 | Mon 05/04 | N/A            | N/A                                                    |
 | Tue 05/05 | N/A            | N/A                                                    |
-| Thu 05/07 | N/A            | N/A                                                    |
+| Thu 05/07 | Kourosh Safari | First Demo of MVP                                      |
 | Mon 05/11 | Tommy Chao     | Retro leader                                           |
 | Tue 05/12 | Alan Zhang     | Leader for Sprint Goal                                 |
-| Thu 05/14 | Kourosh Safari | demo of MVP                                            |
-| Mon 05/18 | TBD            | TBD                                                    |
-| Tue 05/19 | TBD            | TBD                                                    |
-| Thu 05/21 | TBD            | TBD                                                    |
+| Thu 05/14 | N/A            | N/A                                                    |
+| Mon 05/18 | Tommy Chao     | Retro Leader                                           |
+| Tue 05/19 | N/A            | N/A                                                    |
+| Thu 05/21 | Kourosh Safari | Second Demo                                            |
+| Tue 05/26 | Kourosh/Adarsha| Kourosh(Leader of Retro) + Adarsha(Leader of Sprint)   |
+| Thu 05/28 | TBD            | TBD                                                    |

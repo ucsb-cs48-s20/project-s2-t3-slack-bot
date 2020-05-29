@@ -49,3 +49,26 @@ Retro leader fill this in.
 - A brief assessment of how it went. It went fairly well. We discussed what we should start doing as a team, especially highlighting the need for equal team and individual contributions.
 - What advice would you give to the next person leading a retro
   based on what you learned today? If you plan to use start/stop/continue, have an organized way to go though what everyone contributed. Also, don't be afraid to say what needs to be said regarding the team dynamic.
+  
+# Retro 26 May 2020
+- Led by: Kourosh Safari
+- Present: (everyone) Tommy Chao, Alan Zhang, Adarsha Poudel, Kourosh Safari
+
+## Action item
+
+- a goal: Make a big push to work hard into the end of the quarter
+- a change: better communication on Slack
+- a measurement: faster response times would be ideal
+
+## Action item
+
+- a goal: Make and reach faster deadlines
+- a change: Waste less time when it comes to getting work done
+- a measurement: Did we reach our deadlines
+
+## Brief description of how retro went
+
+- Overall positive conversation
+- All agree to work into end of quarter and complete a good final project
+
+
