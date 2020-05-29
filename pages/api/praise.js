@@ -8,7 +8,7 @@ export default async function (req, res) {
 
   //checking if ther user is trying to praise himself
   if (userName == req.body.user_name)
-    res.end("You cannot praise yourself, silly.");
+    res.end("You cannot praise yourself, silly!");
 
   //checking if the name of the person the user wants to praise is an empty string
   if (!userName || userName.trim() === "") {
@@ -26,7 +26,9 @@ export default async function (req, res) {
       if (timeStamp - lastPraised < 20) {
         // if user has already praisied in last 20 seconds wait for some time to praise again
         console.log(`Time difference: ${timeStamp - lastPraised}`);
-        res.end(`Wait ${20 - timeStamp + lastPraised} seconds to praise again`);
+        res.end(
+          `Please wait ${20 - timeStamp + lastPraised} seconds to praise again!`
+        );
       } else {
         await usersCollection.updateOne(query2, {
           $set: { lastPraiseTime: timeStamp },
@@ -40,7 +42,7 @@ export default async function (req, res) {
               $set: { praiseValue: query.praiseValue + 1 },
             });
             console.log(`Successfully updated item with _id: ${query._id}`);
-            res.end(userName.slice(1) + " has been praised.");
+            res.end(userName + " has been praised.");
           } catch (err) {
             console.error(`Failed to update item: ${err}`);
           }
@@ -55,7 +57,7 @@ export default async function (req, res) {
             await usersCollection.insertOne(newUser2);
             let query = await usersCollection.findOne({ name: userName });
             console.log(`Successfully inserted item with _id: ${query._id}`);
-            res.end(userName.slice(1) + " has been praised.");
+            res.end(userName + " has been praised.");
           } catch (err) {
             console.error(`Failed to insert item: ${err}`);
           }

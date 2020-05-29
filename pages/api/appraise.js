@@ -10,13 +10,12 @@ export default async function (req, res) {
     const client = await initDatabase();
     const usersCollection = client.collection("users");
     const query = await usersCollection.findOne({ name: userName });
+
     if (query.praiseValue != 0) {
       console.log("Successfully found user");
-      res.end(
-        userName.slice(1) + " has " + query.praiseValue.toString(10) + " rep!"
-      );
+      res.end(userName + " has " + query.praiseValue.toString(10) + " rep!");
     } else {
-      res.end(userName.slice(1) + " has no rep. :(");
+      res.end(userName + " has no rep. :(");
     }
   }
 }

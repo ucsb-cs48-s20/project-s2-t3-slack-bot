@@ -59,7 +59,7 @@ async function scheduleAdd(req, res, userInput) {
   const userList = await web.users.list({
     token: process.env.SLACK_AUTH_TOKEN,
   });
-  
+
   console.log(userList);
   */
 
