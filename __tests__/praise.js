@@ -41,7 +41,7 @@ describe("/pages/api/praise", () => {
     let client = {
       collection: jest.fn(),
     };
-    let userCollection = {
+    let usersCollection = {
       findOne: jest.fn(),
     };
     let query = {
@@ -52,9 +52,9 @@ describe("/pages/api/praise", () => {
     };
 
     initDatabase.mockResolvedValue(client);
-    client.collection.mockReturnValue(userCollection);
-    userCollection.findOne.mockResolvedValueOnce(query);
-    userCollection.findOne.mockResolvedValueOnce(query2);
+    client.collection.mockReturnValue(usersCollection);
+    usersCollection.findOne.mockResolvedValueOnce(query);
+    usersCollection.findOne.mockResolvedValueOnce(query2);
     getTimeStamp.mockReturnValue(10);
 
     const req = {
@@ -71,12 +71,54 @@ describe("/pages/api/praise", () => {
     await praise(req, res);
     expect(res.end).toBeCalledWith("Please wait 10 seconds to praise again!");
   });
-  it("praising someone", async () => {
+  it("User doesn't exist in database", async () => {
     let client = {
       collection: jest.fn(),
     };
-    let userCollection = {
+    let usersCollection = {
       findOne: jest.fn(),
+      insertOne: jest.fn(),
+    };
+    let query = {
+      praiseValue: 10,
+    };
+    let query2 = false;
+    let newUser = {
+      name: "alanzhang052",
+      praiseValue: 1,
+      lastPraiseTime: 20,
+    };
+
+    initDatabase.mockResolvedValue(client);
+    client.collection.mockReturnValue(usersCollection);
+    usersCollection.findOne.mockResolvedValueOnce(query);
+    usersCollection.findOne.mockResolvedValueOnce(query2);
+    getTimeStamp.mockReturnValue(20);
+    // usersCollection.insertOne.mockResolvedValue(newUser);
+
+    const req = {
+      body: {
+        text: "@kouroshsafari",
+        user_name: "alanzhang052",
+      },
+    };
+
+    let res = {
+      end: jest.fn(),
+    };
+
+    await praise(req, res);
+    expect(res.end).toBeCalledWith(
+      "You have been added to the workspace reputation system!\n Please try appraising again in 20 seconds."
+    );
+  });
+  it("Praising someone", async () => {
+    let client = {
+      collection: jest.fn(),
+    };
+    let usersCollection = {
+      findOne: jest.fn(),
+      updateOne: jest.fn(),
     };
     let query = {
       praiseValue: 10,
@@ -86,9 +128,9 @@ describe("/pages/api/praise", () => {
     };
 
     initDatabase.mockResolvedValue(client);
-    client.collection.mockReturnValue(userCollection);
-    userCollection.findOne.mockResolvedValueOnce(query);
-    userCollection.findOne.mockResolvedValueOnce(query2);
+    client.collection.mockReturnValue(usersCollection);
+    usersCollection.findOne.mockResolvedValueOnce(query);
+    usersCollection.findOne.mockResolvedValueOnce(query2);
     getTimeStamp.mockReturnValue(20);
 
     const req = {
@@ -103,6 +145,6 @@ describe("/pages/api/praise", () => {
     };
 
     await praise(req, res);
-    expect(res.end).toBeCalledWith("Please wait 10 seconds to praise again!");
+    expect(res.end).toBeCalledWith("kouroshsafari has been praised.");
   });
 });

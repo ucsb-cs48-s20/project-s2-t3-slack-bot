@@ -69,7 +69,7 @@ export default async function (req, res) {
       //if you are not in database let add you to mongodb database with the timeStamp which is current time
       const newUser = {
         name: req.body.user_name,
-        praiseValue: 0,
+        praiseValue: 1,
         lastPraiseTime: timeStamp,
       };
       await usersCollection.insertOne(newUser);
