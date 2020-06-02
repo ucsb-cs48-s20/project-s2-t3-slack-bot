@@ -1,9 +1,15 @@
 import schedule from "../pages/api/schedule";
-const { WebClient } = require("@slack/web-api");
+import { listResponse } from "../pages/api/schedule";
+const WebClient = require("@slack/web-api");
 
-// need to MOCK THE MODULE HERE
-jest.mock("@slack/web-api");
-
+function formScheduledRemindersListElement(scheduledMessageJSON, elementIndex) {
+  var reminderDate = new Date(scheduledMessageJSON.post_at * 1000);
+  var timeToPostAsString = reminderDate.toLocaleString();
+  var channelToPostIn = scheduledMessageJSON.channel_id;
+  var scheduledMessage = scheduledMessageJSON.text;
+  // prettier-ignore
+  return ">" + (elementIndex + 1) + ". [" + timeToPostAsString + " for <#" + channelToPostIn + ">]: " + scheduledMessage + "\n"
+}
 function helpString() {
   var helpString = "";
 
@@ -57,7 +63,6 @@ describe("/pages/api/schedule", () => {
 
     expect(res.end).toBeCalledWith(helpString());
   });
-
   it("Calls schedule with improper string", () => {
     const req = {
       body: {
@@ -76,44 +81,7 @@ describe("/pages/api/schedule", () => {
         "`. Please type `/schedule help` for a list of `/schedule` commands."
     );
   });
-
-  it("Calls schedule with list", () => {
-    const req = {
-      body: {
-        text: "list",
-      },
-    };
-
-    let res = {
-      end: jest.fn(),
-    };
-    let testHelper;
-    let list = jest.fn();
-    let scheduledMessages = { list };
-    let chat = { scheduledMessages };
-    let web = { chat };
-
-    let result = {
-      scheduled_messages: [
-        {
-          id: 1,
-          channel_id: 1,
-          post_at: 1000,
-          date_created: 1,
-          text: "testing",
-        },
-      ],
-    };
-
-    //    WebClient.mockReturnValue(web)
-
-    //  list.mockResolvedValue(result);
-    testHelper.mockReturnValue(result);
-
-    schedule(req, res);
-    expect(res.end).toBeCalledWith("empty");
-  });
-
+  // THIS WILL OUTPUT AN ERROR MESSAGE WHEN TESTING THIS IS ***OK***!
   it("Calls add with not enough parameters", () => {
     const req = {
       body: {
@@ -130,4 +98,45 @@ describe("/pages/api/schedule", () => {
       "You did not enter enough parameters. You entered `/schedule add`.\nYou can add a reminder using this syntax: `/schedule add [month] [day] [year] [hour] [minute] [AM/PM] [message]`. Type `/schedule help` for more info."
     );
   });
+  it("Calls remove with no index", () => {
+    const req = {
+      body: {
+        text: "remove",
+      },
+    };
+
+    let res = {
+      end: jest.fn(),
+    };
+
+    schedule(req, res);
+    expect(res.end).toBeCalledWith(
+      "Please enter the number of the reminder from `/schedule list` you would like to remove. Example: `/schedule remove 3`"
+    );
+  });
+  describe("listResponse", () => {
+    it("Calls schedule with empty list", () => {
+      let scheduled_messages = [];
+      expect(listResponse(scheduled_messages)).toBe(
+        "There are currently no scheduled reminders. You can add a reminder by using `/schedule add`."
+      );
+    });
+    it("Calls schedule with nonempty list", () => {
+      let scheduled_messages = [
+        {
+          id: 1,
+          channel_id: 1,
+          post_at: 1000,
+          date_created: 1,
+          text: "testing",
+        },
+      ];
+
+      expect(listResponse(scheduled_messages)).toBe(
+        "*Here is the list of scheduled reminders:*\n>1. [12/31/1969, 4:16:40 PM for <#1>]: testing\n"
+      );
+    });
+  });
 });
+/*
+ */
