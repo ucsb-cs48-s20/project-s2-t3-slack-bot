@@ -225,6 +225,8 @@ async function scheduleList(req, res, userInput) {
       //channel: req.body.channel_id, // This parameter can be used to specify what channel to only retrieve reminders from
     });
 
+    result = testHelper(result);
+
     // Check to see if there are any scheduled reminders
     if (result.scheduled_messages.length == 0) {
       // Tell user there are no reminders, if this is the case
