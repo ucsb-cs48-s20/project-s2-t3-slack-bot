@@ -5,7 +5,10 @@ function SlackButton() {
       <div>
         Add our bot to your Slack workspace by clicking the button below!
       </div>
-      <a href="https://slack.com/oauth/v2/authorize?scope=incoming-webhook,commands,chat:write&client_id=1089398914164.1087443355106">
+      <a
+        id="add-to-SlackButton"
+        href="https://slack.com/oauth/v2/authorize?scope=incoming-webhook,commands,chat:write&client_id=1089398914164.1087443355106"
+      >
         <img
           alt="Add to Slack"
           height="40"

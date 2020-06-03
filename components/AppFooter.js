@@ -5,7 +5,10 @@ function AppFooter() {
     <Container style={{ fontWeight: "italic" }}>
       <br />
       Source Code:{" "}
-      <a href="https://github.com/ucsb-cs48-s20/project-s2-t3-slack-bot">
+      <a
+        id="footer"
+        href="https://github.com/ucsb-cs48-s20/project-s2-t3-slack-bot"
+      >
         GitHub
       </a>
     </Container>

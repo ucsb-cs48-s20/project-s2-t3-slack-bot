@@ -13,12 +13,12 @@ export default async function (req, res) {
   var timeStamp = Math.floor(Date.now() / 1000);
 
   //checking if ther user is trying to praise himself
-  if (userName == req.body.user_name)
+  if (userName == req.body.user_name) {
     res.end("You cannot praise yourself, silly.");
-  return;
+    return;
 
-  //checking if the name of the person the user wants to praise is an empty string
-  else if (!userName || userName.trim() === "") {
+    //checking if the name of the person the user wants to praise is an empty string
+  } else if (!userName || userName.trim() === "") {
     res.end("Please tag the person you want to praise :)");
     return;
   } else {
