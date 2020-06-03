@@ -1,5 +1,6 @@
 require("dotenv").config();
 const request = require("request");
+import getTimeStamp from "../../utils/getTimeStamp";
 import { initDatabase } from "../../utils/mongodb";
 
 export default async function (req, res) {
@@ -17,7 +18,7 @@ export default async function (req, res) {
   return;
 
   //checking if the name of the person the user wants to praise is an empty string
-  if (!userName || userName.trim() === "") {
+  else if (!userName || userName.trim() === "") {
     res.end("Please tag the person you want to praise :)");
     return;
   } else {
@@ -44,11 +45,14 @@ export default async function (req, res) {
       //if you are not in database lets add you to mongodb database with the timeStamp which is current time
       const newUser = {
         name: req.body.user_name,
-        praiseValue: 0,
+        praiseValue: 1,
         lastPraiseTime: timeStamp,
         lastApraiseTime: 0,
       };
       await usersCollection.insertOne(newUser);
+      res.end(
+        "You have been added to the workspace reputation system!\n Please try appraising again in 20 seconds."
+      );
     }
 
     //if you have not praised in last 20 seconds you are ready to either add a new user with praiseValue 1 or increment their praiseValue

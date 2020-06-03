@@ -59,7 +59,7 @@ async function scheduleAdd(req, res, userInput) {
   const userList = await web.users.list({
     token: process.env.SLACK_AUTH_TOKEN,
   });
-  
+
   console.log(userList);
   */
 
@@ -186,7 +186,6 @@ async function scheduleAdd(req, res, userInput) {
       );
     }
   }
-
   try {
     // Create the scheduled message that gets posted at dateInFuture's time
     const result = await web.chat.scheduleMessage({
@@ -224,29 +223,7 @@ async function scheduleList(req, res, userInput) {
       token: process.env.SLACK_AUTH_TOKEN,
       //channel: req.body.channel_id, // This parameter can be used to specify what channel to only retrieve reminders from
     });
-
-    // Check to see if there are any scheduled reminders
-    if (result.scheduled_messages.length == 0) {
-      // Tell user there are no reminders, if this is the case
-      res.end(
-        "There are currently no scheduled reminders. You can add a reminder by using `/schedule add`."
-      );
-    }
-
-    // Declare a string variable to write all scheduled reminders to
-    var scheduledRemindersList = "*Here is the list of scheduled reminders:*\n";
-
-    // Traverse list of scheduled reminders and append them to the string (scheduledRemindersList)
-    for (var i = 0; i < result.scheduled_messages.length; i++) {
-      // Why is result.scheduled_messages in random order ???
-      scheduledRemindersList += formScheduledRemindersListElement(
-        result.scheduled_messages[i],
-        i
-      );
-    }
-
-    // Send list (visible only to person who scheduled) to user
-    res.end(scheduledRemindersList);
+    res.end(listResponse(result.scheduled_messages));
   } catch (error) {
     // Send message (visible only to person who typed the command) that the command failed
     console.error(error);
@@ -417,4 +394,26 @@ function validateUserInputParameter(
         "If you are seeing this message, then the developers of this bot made a bug here! Error (1)"
       );
   }
+}
+
+export function listResponse(scheduled_messages) {
+  if (scheduled_messages.length == 0) {
+    // Tell user there are no reminders, if this is the case
+    return "There are currently no scheduled reminders. You can add a reminder by using `/schedule add`.";
+  }
+  console.log("RES.END DOESNT RETURN");
+  // Declare a string variable to write all scheduled reminders to
+  var scheduledRemindersList = "*Here is the list of scheduled reminders:*\n";
+
+  // Traverse list of scheduled reminders and append them to the string (scheduledRemindersList)
+  for (var i = 0; i < scheduled_messages.length; i++) {
+    // Why is result.scheduled_messages in random order ???
+    scheduledRemindersList += formScheduledRemindersListElement(
+      scheduled_messages[i],
+      i
+    );
+  }
+  console.log(scheduledRemindersList);
+  // Send list (visible only to person who scheduled) to user
+  return scheduledRemindersList;
 }
