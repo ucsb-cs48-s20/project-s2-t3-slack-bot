@@ -74,7 +74,7 @@ export default async function (req, res) {
       };
       await usersCollection.insertOne(newUser);
       res.end(
-        "You have been added to the workspace reputation system!\n Please try appraising again in 20 seconds."
+        "You have been added to the workspace reputation system!\n Please try praising again in 20 seconds."
       );
     }
   }
