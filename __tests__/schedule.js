@@ -2,6 +2,8 @@ import schedule from "../pages/api/schedule";
 import { listResponse } from "../pages/api/schedule";
 const WebClient = require("@slack/web-api");
 
+process.TZ = "America/Los_Angeles";
+
 function formScheduledRemindersListElement(scheduledMessageJSON, elementIndex) {
   var reminderDate = new Date(scheduledMessageJSON.post_at * 1000);
   var timeToPostAsString = reminderDate.toLocaleString();

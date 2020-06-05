@@ -25,19 +25,19 @@ export default async function (req, res) {
     //if not empty initiazlize mongodbdatabase and get the usercollection to access it.
     const client = await initDatabase();
     const usersCollection = client.collection("users");
-    const query = await usersCollection.findOne({ name: userName });
-    const query2 = await usersCollection.findOne({ name: req.body.user_name });
+    const praisee = await usersCollection.findOne({ name: userName });
+    const praiser = await usersCollection.findOne({ name: req.body.user_name });
 
-    if (query2) {
+    if (praiser) {
       //if you are in database lets get the time you last praised
-      var lastPraised = query2.lastPraiseTime; //this is last time the user praise someone
+      var lastPraised = praiser.lastPraiseTime; //this is last time the user praise someone
       if (timeStamp - lastPraised < 20) {
         // if user has already praisied in last 20 seconds wait for some time to praise again
-        console.log(`Time difference: ${timeStamp - lastPraised}`);
+        // console.log(`Time difference: ${timeStamp - lastPraised}`);
         res.end(`Wait ${20 - timeStamp + lastPraised} seconds to praise again`);
         return;
       } else {
-        await usersCollection.updateOne(query2, {
+        await usersCollection.updateOne(praiser, {
           $set: { lastPraiseTime: timeStamp },
         });
       }
@@ -53,16 +53,17 @@ export default async function (req, res) {
       res.end(
         "You have been added to the workspace reputation system!\n Please try praising again in 20 seconds."
       );
+      return;
     }
 
     //if you have not praised in last 20 seconds you are ready to either add a new user with praiseValue 1 or increment their praiseValue
-    if (query) {
+    if (praisee) {
       //if user exits increment their praiseValue
       try {
-        await usersCollection.updateOne(query, {
-          $set: { praiseValue: query.praiseValue + 1 },
+        await usersCollection.updateOne(praisee, {
+          $set: { praiseValue: praisee.praiseValue + 1 },
         });
-        console.log(`Successfully updated item with _id: ${query._id}`);
+        // console.log(`Successfully updated item with _id: ${praisee._id}`);
         res.end(userName + " has been praised.");
         return;
       } catch (err) {
@@ -78,8 +79,8 @@ export default async function (req, res) {
       };
       try {
         await usersCollection.insertOne(newUser2);
-        let query = await usersCollection.findOne({ name: userName });
-        console.log(`Successfully inserted item with _id: ${query._id}`);
+        let praisee = await usersCollection.findOne({ name: userName });
+        // console.log(`Successfully inserted item with _id: ${praisee._id}`);
         res.end(userName + " has been praised.");
         return;
       } catch (err) {

@@ -22,9 +22,11 @@ export default async function (req, res) {
     if (query2) {
       //if you are in database lets get the time you last apraised
       var lastPraised = query2.lastApraiseTime; //this is last time the user apraised someone
-      console.log(lastPraised);
+      // console.log(lastPraised);
       if (timeStamp - lastPraised < 6) {
-        res.end(`Wait ${6 - timeStamp + lastPraised} seconds to apraise again`);
+        res.end(
+          `Wait ${6 - timeStamp + lastPraised} seconds to appraise again`
+        );
         return;
       } else {
         await usersCollection.updateOne(query2, {
@@ -43,7 +45,7 @@ export default async function (req, res) {
 
     if (query) {
       if (query.praiseValue != 0) {
-        console.log("Successfully found user");
+        // console.log("Successfully found user");
         res.end(userName + " has " + query.praiseValue.toString(10) + " rep!");
         return;
       } else {
