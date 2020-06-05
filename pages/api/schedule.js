@@ -201,14 +201,18 @@ async function scheduleAdd(req, res, userInput) {
       "Successfully scheduled reminder `" +
         mDYHMAMUserInputArray[6] +
         "` for `" +
-        dateInFuture.toLocaleString() +
+        dateInFuture.toLocaleString("en-US", {
+          timeZone: "America/Los_Angeles",
+        }) +
         "`."
     );
   } catch (error) {
     // Send message (visible only to person who scheduled) that the scheduled reminder was NOT successfully added
     res.end(
       "Error adding scheduled reminder for `" +
-        dateInFuture.toLocaleString() +
+        dateInFuture.toLocaleString("en-US", {
+          timeZone: "America/Los_Angeles",
+        }) +
         "`. Remember you can only schedule a reminder 120 days in advance and cannot schedule a reminder for the past."
     );
     console.error(error);
@@ -280,7 +284,9 @@ async function scheduleRemove(req, res, userInput) {
 
     // Tell the user that the remove was successful
     var reminderDate = new Date(reminderToBeDeleted.post_at * 1000);
-    var reminderToBeDeletedTimeAsString = reminderDate.toLocaleString();
+    var reminderToBeDeletedTimeAsString = reminderDate.toLocaleString("en-US", {
+      timeZone: "America/Los_Angeles",
+    });
     res.end(
       "The reminder `" +
         reminderToBeDeleted.text +
@@ -326,7 +332,9 @@ async function scheduleHelp(req, res, userInput) {
 
 function formScheduledRemindersListElement(scheduledMessageJSON, elementIndex) {
   var reminderDate = new Date(scheduledMessageJSON.post_at * 1000);
-  var timeToPostAsString = reminderDate.toLocaleString();
+  var timeToPostAsString = reminderDate.toLocaleString("en-US", {
+    timeZone: "America/Los_Angeles",
+  });
   var channelToPostIn = scheduledMessageJSON.channel_id;
   var scheduledMessage = scheduledMessageJSON.text;
   // prettier-ignore
