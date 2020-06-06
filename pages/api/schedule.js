@@ -148,7 +148,7 @@ async function scheduleAdd(req, res, userInput) {
   );
   if (mDYHMAMUserInputArray[5].toLowerCase() == "pm") {
     dateInFuture.setHours(
-      mDYHMAMUserInputArray[3] + 12,
+      parseInt(mDYHMAMUserInputArray[3]) + 12, // This parseInt is necessary. Otherwise it will concatenate the 12.
       mDYHMAMUserInputArray[4],
       0,
       0
@@ -172,13 +172,13 @@ async function scheduleAdd(req, res, userInput) {
     });
 
     // Send message (visible only to person who scheduled) that the scheduled reminder was successfully added
-    //console.log(userInput);
-    //console.log(mDYHMAMUserInputArray);
     res.end(
       "Successfully scheduled reminder `" +
         mDYHMAMUserInputArray[6] +
         "` for `" +
-        dateInFuture.toLocaleString() +
+        dateInFuture.toLocaleString("en-US", {
+          timeZone: "America/Los_Angeles",
+        }) +
         "`."
     );
   } catch (error) {
@@ -241,7 +241,7 @@ async function scheduleRemove(req, res, userInput) {
   if (inputReminderNumber < 1 || inputReminderNumber > numOfReminders) {
     // Tell the user that their input is not valid
     res.end(
-      "Reminder #" +
+      "Reminder " +
         inputReminderNumber +
         " is not a valid reminder. Type `/schedule list` for the list of reminders and try again."
     );
