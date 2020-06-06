@@ -172,13 +172,13 @@ async function scheduleAdd(req, res, userInput) {
     });
 
     // Send message (visible only to person who scheduled) that the scheduled reminder was successfully added
+    //console.log(userInput);
+    //console.log(mDYHMAMUserInputArray);
     res.end(
       "Successfully scheduled reminder `" +
         mDYHMAMUserInputArray[6] +
         "` for `" +
-        dateInFuture.toLocaleString("en-US", {
-          timeZone: "America/Los_Angeles",
-        }) +
+        dateInFuture.toLocaleString() +
         "`."
     );
   } catch (error) {
@@ -267,7 +267,7 @@ async function scheduleRemove(req, res, userInput) {
         reminderToBeDeleted.text +
         "` scheduled for `" +
         reminderToBeDeletedTimeAsString +
-        "` was successfully removed.*"
+        "` was successfully removed."
     );
   } catch (error) {
     // Send error message to user
@@ -384,7 +384,7 @@ export function listResponse(scheduled_messages) {
     // Tell user there are no reminders, if this is the case
     return "There are currently no scheduled reminders. You can add a reminder by using `/schedule add`.";
   }
-  console.log("RES.END DOESNT RETURN");
+
   // Declare a string variable to write all scheduled reminders to
   var scheduledRemindersList = "*Here is the list of scheduled reminders:*\n";
 
@@ -396,7 +396,7 @@ export function listResponse(scheduled_messages) {
       i
     );
   }
-  console.log(scheduledRemindersList);
+
   // Send list (visible only to person who scheduled) to user
   return scheduledRemindersList;
 }
