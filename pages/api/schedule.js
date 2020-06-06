@@ -11,9 +11,6 @@ const web = new WebClient(token);
 // Declare global variable for user input
 var userInput;
 
-// Toggle for UTC offset (because deploying to heroku resets the times to UTC ???)
-var UTCOffset = false;
-
 export default async function (req, res) {
   // Assign userInput with the user input
   userInput = req.body.text;
@@ -54,16 +51,7 @@ export default async function (req, res) {
 // e.g.   /schedule add 5 19 2020 3 20 pm @channel class starting in 10 minutes
 // "mDYHMAM" whereever it appears in the code stands for "month", "day", "year", "hour", "minute", "am/pm", and "message"
 async function scheduleAdd(req, res, userInput) {
-  /*
-  // Get list of users for whenever the message contains an @
-  const userList = await web.users.list({
-    token: process.env.SLACK_AUTH_TOKEN,
-  });
-
-  console.log(userList);
-  */
-
-  // Hard-coded strings for printing in error messages
+  // Hard-coded strings for printing in messages
   var mDYHMAMStringArray = [
     "month",
     "day",
@@ -74,7 +62,7 @@ async function scheduleAdd(req, res, userInput) {
     "message",
   ];
 
-  // Check to see if they didn't enter anything past the word "add"
+  // Check to see if user didn't enter anything past the word "add"
   if (userInput.indexOf(" ") == -1) {
     res.end(
       "You can add a reminder using this syntax: `/schedule add [month] [day] [year] [hour] [minute] [AM/PM] [message]`. Type `/schedule help` for more info."
@@ -106,7 +94,7 @@ async function scheduleAdd(req, res, userInput) {
     );
   }
 
-  // Push timeAndMessageString into user input array, which the string should now just be the message
+  // Push timeAndMessageString into user input array, which should now just be the message
   mDYHMAMUserInputArray.push(timeAndMessageString);
 
   // Validate the six time variables
@@ -133,6 +121,11 @@ async function scheduleAdd(req, res, userInput) {
     }
   }
 
+  // Check to see if user put in 12 for the hour. Set it to 0 if it is.
+  if (mDYHMAMUserInputArray[3] == 12) {
+    mDYHMAMUserInputArray[3] = 0;
+  }
+
   // Reformatting of @channel/@here/@userThatAddedTheReminder
   mDYHMAMUserInputArray[6] = mDYHMAMUserInputArray[6].replace(
     /@channel/g,
@@ -154,37 +147,19 @@ async function scheduleAdd(req, res, userInput) {
     mDYHMAMUserInputArray[1]
   );
   if (mDYHMAMUserInputArray[5].toLowerCase() == "pm") {
-    if (UTCOffset) {
-      dateInFuture.setHours(
-        parseInt(mDYHMAMUserInputArray[3]) + 12 - 7,
-        mDYHMAMUserInputArray[4],
-        0,
-        0
-      );
-    } else {
-      dateInFuture.setHours(
-        parseInt(mDYHMAMUserInputArray[3]) + 12,
-        mDYHMAMUserInputArray[4],
-        0,
-        0
-      );
-    }
+    dateInFuture.setHours(
+      parseInt(mDYHMAMUserInputArray[3]) + 12, // This parseInt is necessary. Otherwise it will concatenate the 12.
+      mDYHMAMUserInputArray[4],
+      0,
+      0
+    );
   } else {
-    if (UTCOffset) {
-      dateInFuture.setHours(
-        mDYHMAMUserInputArray[3] - 7,
-        mDYHMAMUserInputArray[4],
-        0,
-        0
-      );
-    } else {
-      dateInFuture.setHours(
-        mDYHMAMUserInputArray[3],
-        mDYHMAMUserInputArray[4],
-        0,
-        0
-      );
-    }
+    dateInFuture.setHours(
+      mDYHMAMUserInputArray[3],
+      mDYHMAMUserInputArray[4],
+      0,
+      0
+    );
   }
   try {
     // Create the scheduled message that gets posted at dateInFuture's time
@@ -266,7 +241,7 @@ async function scheduleRemove(req, res, userInput) {
   if (inputReminderNumber < 1 || inputReminderNumber > numOfReminders) {
     // Tell the user that their input is not valid
     res.end(
-      "Reminder #" +
+      "Reminder " +
         inputReminderNumber +
         " is not a valid reminder. Type `/schedule list` for the list of reminders and try again."
     );
@@ -292,7 +267,7 @@ async function scheduleRemove(req, res, userInput) {
         reminderToBeDeleted.text +
         "` scheduled for `" +
         reminderToBeDeletedTimeAsString +
-        "` was successfully removed.*"
+        "` was successfully removed."
     );
   } catch (error) {
     // Send error message to user
@@ -409,7 +384,7 @@ export function listResponse(scheduled_messages) {
     // Tell user there are no reminders, if this is the case
     return "There are currently no scheduled reminders. You can add a reminder by using `/schedule add`.";
   }
-  console.log("RES.END DOESNT RETURN");
+
   // Declare a string variable to write all scheduled reminders to
   var scheduledRemindersList = "*Here is the list of scheduled reminders:*\n";
 
@@ -421,7 +396,7 @@ export function listResponse(scheduled_messages) {
       i
     );
   }
-  console.log(scheduledRemindersList);
+
   // Send list (visible only to person who scheduled) to user
   return scheduledRemindersList;
 }
