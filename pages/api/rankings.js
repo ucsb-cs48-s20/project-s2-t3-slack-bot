@@ -13,7 +13,7 @@ export default async function (req, res) {
     .toArray();
   var response = "Workspace Leaderboard:\n";
   for (var i = 0; i < query.length; i++) {
-    response += query[i].name.slice(1);
+    response += query[i].name.slice(req.body.team_id.length);
     response += ": ";
     response += query[i].praiseValue;
     response += "\n";

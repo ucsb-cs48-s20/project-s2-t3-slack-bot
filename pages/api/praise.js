@@ -9,11 +9,12 @@ export default async function (req, res) {
     res.end("No username found. Please try again!");
     return;
   }
-  userName = userName.slice(1);
+  userName = req.body.team_id + req.body.text.slice(1);
+  console.log("Username of praisee: " + userName); // Check what userName is
   var timeStamp = Math.floor(Date.now() / 1000);
 
   //checking if ther user is trying to praise himself
-  if (userName == req.body.user_name) {
+  if (userName.slice(req.body.team_id.length) == req.body.user_name) {
     res.end("You cannot praise yourself, silly.");
     return;
 
@@ -25,12 +26,16 @@ export default async function (req, res) {
     //if not empty initiazlize mongodbdatabase and get the usercollection to access it.
     const client = await initDatabase();
     const usersCollection = client.collection("users");
+    // Should be trying to find [workspace id]+[userName] e.g. T012MBQSW4Ualkouroshsafari
     const praisee = await usersCollection.findOne({ name: userName });
-    const praiser = await usersCollection.findOne({ name: req.body.user_name });
+    // Should be trying to find [workspace id]+[userName] e.g. T012MBQSW4Ualan.zhang.052
+    const praiser = await usersCollection.findOne({
+      name: req.body.team_id + req.body.user_name,
+    });
 
     if (praiser) {
-      //if you are in database lets get the time you last praised
-      var lastPraised = praiser.lastPraiseTime; //this is last time the user praise someone
+      // if in database get the time you last praised
+      var lastPraised = praiser.lastPraiseTime; // last time the user praise someone
       if (timeStamp - lastPraised < 20) {
         // if user has already praisied in last 20 seconds wait for some time to praise again
         // console.log(`Time difference: ${timeStamp - lastPraised}`);
@@ -44,8 +49,8 @@ export default async function (req, res) {
     } else {
       //if you are not in database lets add you to mongodb database with the timeStamp which is current time
       const newUser = {
-        name: req.body.user_name,
-        praiseValue: 1,
+        name: req.body.team_id + req.body.user_name,
+        praiseValue: 0,
         lastPraiseTime: timeStamp,
         lastApraiseTime: 0,
       };
@@ -64,7 +69,7 @@ export default async function (req, res) {
           $set: { praiseValue: praisee.praiseValue + 1 },
         });
         // console.log(`Successfully updated item with _id: ${praisee._id}`);
-        res.end(userName + " has been praised.");
+        res.end(req.body.text.slice(1) + " has been praised.");
         return;
       } catch (err) {
         console.error(`Failed to update item: ${err}`);
