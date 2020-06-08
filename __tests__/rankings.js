@@ -5,7 +5,11 @@ jest.mock("../utils/mongodb");
 
 describe("/pages/api/rankings", () => {
   it("calling rankings with an empty database", async () => {
-    const req = {};
+    const req = {
+      body: {
+        team_id: "",
+      },
+    };
 
     let res = {
       end: jest.fn(),
@@ -44,7 +48,11 @@ describe("/pages/api/rankings", () => {
   });
 
   it("calling rankings less than 3 people", async () => {
-    const req = {};
+    const req = {
+      body: {
+        team_id: "",
+      },
+    };
 
     let res = {
       end: jest.fn(),
@@ -70,8 +78,8 @@ describe("/pages/api/rankings", () => {
     };
 
     let query = [
-      { praiseValue: 2, name: "@adarsha" },
-      { praiseValue: 0, name: "@kourosh" },
+      { praiseValue: 2, name: "adarsha" },
+      { praiseValue: 0, name: "kourosh" },
     ];
 
     initDatabase.mockResolvedValue(client);
@@ -87,7 +95,11 @@ describe("/pages/api/rankings", () => {
     );
   });
   it("calling rankings with exactly 3 people", async () => {
-    const req = {};
+    const req = {
+      body: {
+        team_id: "",
+      },
+    };
 
     let res = {
       end: jest.fn(),
@@ -113,9 +125,9 @@ describe("/pages/api/rankings", () => {
     };
 
     let query = [
-      { praiseValue: 12, name: "@fattie" },
-      { praiseValue: 2, name: "@adarsha" },
-      { praiseValue: 0, name: "@kourosh" },
+      { praiseValue: 12, name: "fattie" },
+      { praiseValue: 2, name: "adarsha" },
+      { praiseValue: 0, name: "kourosh" },
     ];
 
     initDatabase.mockResolvedValue(client);
@@ -132,7 +144,11 @@ describe("/pages/api/rankings", () => {
   });
 
   it("calling rankings with more than 3 people", async () => {
-    const req = {};
+    const req = {
+      body: {
+        team_id: "",
+      },
+    };
 
     let res = {
       end: jest.fn(),
@@ -158,10 +174,10 @@ describe("/pages/api/rankings", () => {
     };
 
     let query = [
-      { praiseValue: 69, name: "@nice" },
-      { praiseValue: 12, name: "@fattie" },
-      { praiseValue: 2, name: "@adarsha" },
-      { praiseValue: 0, name: "@kourosh" },
+      { praiseValue: 69, name: "nice" },
+      { praiseValue: 12, name: "fattie" },
+      { praiseValue: 2, name: "adarsha" },
+      { praiseValue: 0, name: "kourosh" },
     ];
 
     initDatabase.mockResolvedValue(client);
