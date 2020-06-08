@@ -86,7 +86,7 @@ export default async function (req, res) {
         await usersCollection.insertOne(newUser2);
         let praisee = await usersCollection.findOne({ name: userName });
         // console.log(`Successfully inserted item with _id: ${praisee._id}`);
-        res.end(userName + " has been praised.");
+        res.end(req.body.text.slice(1) + " has been praised.");
         return;
       } catch (err) {
         console.error(`Failed to insert item: ${err}`);
