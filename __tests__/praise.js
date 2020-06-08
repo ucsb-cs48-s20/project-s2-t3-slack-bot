@@ -10,6 +10,7 @@ describe("/pages/api/praise", () => {
     const req = {
       body: {
         text: "",
+        team_id: "",
       },
     };
 
@@ -27,6 +28,7 @@ describe("/pages/api/praise", () => {
       body: {
         text: "@alanzhang052",
         user_name: "alanzhang052",
+        team_id: "",
       },
     };
 
@@ -62,6 +64,7 @@ describe("/pages/api/praise", () => {
       body: {
         text: "@kouroshsafari",
         user_name: "alanzhang052",
+        team_id: "",
       },
     };
 
@@ -101,6 +104,7 @@ describe("/pages/api/praise", () => {
       body: {
         text: "@kouroshsafari",
         user_name: "alanzhang052",
+        team_id: "",
       },
     };
 
@@ -138,6 +142,7 @@ describe("/pages/api/praise", () => {
       body: {
         text: "@kouroshsafari",
         user_name: "alanzhang052",
+        team_id: "",
       },
     };
 

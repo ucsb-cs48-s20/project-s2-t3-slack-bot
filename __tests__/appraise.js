@@ -8,6 +8,7 @@ describe("/pages/api/appraise", () => {
     const req = {
       body: {
         text: "",
+        team_id: "",
       },
     };
 
@@ -37,6 +38,7 @@ describe("/pages/api/appraise", () => {
     const req = {
       body: {
         text: "@alanzhang052",
+        team_id: "",
       },
     };
 
@@ -71,6 +73,7 @@ describe("/pages/api/appraise", () => {
     const req = {
       body: {
         text: "@alanzhang052",
+        team_id: "",
       },
     };
 
