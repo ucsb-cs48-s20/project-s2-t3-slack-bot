@@ -7,13 +7,13 @@ export default async function (req, res) {
   const client = await initDatabase();
   const usersCollection = client.collection("users");
   const query = await usersCollection
-    .find({})
+    .find({ name: { $regex: new RegExp("^" + req.body.team_id, "i") } })
     .sort({ praiseValue: -1 })
     .limit(lb_size)
     .toArray();
   var response = "Workspace Leaderboard:\n";
   for (var i = 0; i < query.length; i++) {
-    response += query[i].name.slice(1);
+    response += query[i].name.slice(req.body.team_id.length);
     response += ": ";
     response += query[i].praiseValue;
     response += "\n";
