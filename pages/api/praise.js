@@ -9,6 +9,10 @@ export default async function (req, res) {
     res.end("No username found. Please try again!");
     return;
   }
+  if (user.charAt(0) != "@") {
+    res.end("Invalid user.\nPlease add a @ at the start of the input.");
+    return;
+  }
   userName = req.body.team_id + req.body.text.slice(1);
   console.log("Username of praisee: " + userName); // Check what userName is
   var timeStamp = Math.floor(Date.now() / 1000);
