@@ -9,24 +9,22 @@ export default async function (req, res) {
     res.end("No username found. Please try again!");
     return;
   }
-  if (user.charAt(0) != "@") {
-    res.end("Invalid user.\nPlease add a @ at the start of the input.");
-    return;
-  }
-  userName = req.body.team_id + req.body.text.slice(1);
-  console.log("Username of praisee: " + userName); // Check what userName is
-  var timeStamp = Math.floor(Date.now() / 1000);
 
   //checking if ther user is trying to praise himself
-  if (userName.slice(req.body.team_id.length) == req.body.user_name) {
+  if (userName.slice(1) == req.body.user_name) {
     res.end("You cannot praise yourself, silly.");
     return;
-
     //checking if the name of the person the user wants to praise is an empty string
   } else if (!userName || userName.trim() === "") {
     res.end("Please tag the person you want to praise :)");
     return;
+  } else if (userName.charAt(0) != "@") {
+    res.end("Invalid user.\nPlease add a @ at the start of the input.");
+    return;
   } else {
+    userName = req.body.team_id + req.body.text.slice(1);
+    console.log("Username of praisee: " + userName); // Check what userName is
+    var timeStamp = Math.floor(Date.now() / 1000);
     //if not empty initiazlize mongodbdatabase and get the usercollection to access it.
     const client = await initDatabase();
     const usersCollection = client.collection("users");

@@ -8,18 +8,18 @@ export default async function (req, res) {
     res.end("No username found. Please try again!");
     return;
   }
-  if (user.charAt(0) != "@") {
-    res.end("Invalid user.\nPlease add a @ at the start of the input.");
-    return;
-  }
-  userName = req.body.team_id + userName.slice(1);
-  console.log("Username of target: " + userName);
-  var timeStamp = Math.floor(Date.now() / 1000);
 
   if (!userName || userName.trim() === "") {
     res.end("Please tag the person you want to view :)");
     return;
+  } else if (userName.charAt(0) != "@") {
+    res.end("Invalid user.\nPlease add a @ at the start of the input.");
+    return;
   } else {
+    userName = req.body.team_id + userName.slice(1);
+    console.log("Username of target: " + userName);
+    var timeStamp = Math.floor(Date.now() / 1000);
+
     const client = await initDatabase();
     const usersCollection = client.collection("users");
     const appraisee = await usersCollection.findOne({ name: userName });
